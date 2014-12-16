@@ -1,0 +1,29 @@
+### folders
+bin/
+
+### java specifics
+*.class
+
+# package files
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs
+hs_err_pid*
+
+### generic files to ignore
+*~
+*.lock
+
+# mac
+*.DS_Store
+*.DS_Store?
+*._*
+*.Spotlight-V100
+*.Trashes
+*.Thumbs.db
+*.ehthumbs.db
+
+# linux - vi
+*.swp
