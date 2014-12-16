@@ -5,9 +5,9 @@ bin/
 *.class
 
 # package files
-*.jar
-*.war
-*.ear
+/*.jar
+/*.war
+/*.ear
 
 # virtual machine crash logs
 hs_err_pid*
