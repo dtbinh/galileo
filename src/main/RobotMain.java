@@ -77,15 +77,16 @@ public class RobotMain {
 			LCD.clear(3);
 			sample_ev3_ultra_rb.fetchSample(ultra_sample_rb, 0);
 			LCD.drawString("uss_rb: " + ultra_sample_rb[0], 0, 3);
-
+			
 			Delay.msDelay(500);
 			
 			int ultra_sample_intbits_rf = Float.floatToIntBits(ultra_sample_rf[0]);
 			int ultra_sample_intbits_rb = Float.floatToIntBits(ultra_sample_rb[0]);
-			int ultra_sample_intbits_f = Float.floatToIntBits(ultra_sample_f[0]);
-
+			int ultra_sample_intbits_f  = Float.floatToIntBits(ultra_sample_f[0]);
+			
+			// fill packet
 			for (int i = 0; i < 4; i++)
-				sendData[i] = (byte) ((ultra_sample_intbits_f >> ((7 - i) * 8)) & 0xff);
+				sendData[i]		= (byte) ((ultra_sample_intbits_f  >> ((7 - i) * 8)) & 0xff);
 			for (int i = 0; i < 4; i++)
 				sendData[i + 4] = (byte) ((ultra_sample_intbits_rf >> ((7 - i) * 8)) & 0xff);
 			for (int i = 0; i < 4; i++)
