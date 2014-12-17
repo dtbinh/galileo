@@ -1,6 +1,5 @@
 package movement;
 
-import util.SensorThread;
 import lejos.hardware.motor.Motor;
 import lejos.robotics.RegulatedMotor;
 
