@@ -1,3 +1,73 @@
+Github / project download:
+==========================
+the old github repository
+https://github.com/zmint/hsa-galileo
+
+the NEW github repository
+https://github.com/zmint/galileo
+
+
+Normally you are ready to go when you follow the Instructions below.
+If something isn't working please ask!
+
+
+How to import the project from github!
+--------------------------------------
+#OPTION 1: CLONE THE REPOSITORY WITH COMMANDLINE
+open a terminal, shell
+cd to the directory, where you want to store the project
+git clone <url>
+
+now go on with import existing project into eclipse
+
+
+#OPTION 2: CLONE THE REPOSITORY WITH A GUI TOOL
+since I don't know which gui tool you're using i can't give a detailed description, but in general there will be a
+field where you put in the  github repository url  and clone it
+
+now go on with import existing project into eclipse
+
+
+#OPTION 3: CLONE THE REPOSITORY DIRECTLY WITH ECLIPSE
+
+you probably have to install this in eclipse, via 'Help - Install new Software' http://www.eclipse.org/egit/download/
+
+in the package explorer right click - import - Git - Projects from Git - Clone URI
+insert the repository URL into the URI field
+if you want, you can add your username and password, if not you just have to type it when you do a commit
+next - choose a local destination and leave the other stuff as it is - next
+now import existing project! - next			// IMPORTANT
+if the project is clicked just hit Finish
+
+
+#IMPORT EXISTING PROJECT into eclipse		(this is importing, so you'll have the exact same project structure like everyone else)
+right click in the package explorer - import - General - Existing Project into Workspace
+Select root directory -> Browse to the destination where you have cloned the repository - OK
+if the project isn't clicked, click.
+Finish
+
+congratz! now the project is loaded into eclipse and synched via git!
+
+
+#FINALLY	-	change native library location of lwjgl.jar (used for drawing the map)
+right click on the project - Build Path - Configure Build Path
+click the small arrow left of lwjgl.jar
+double click 'Native library location'
+change the osname to the os you're running		(windows, macosx, solaris, linux)
+
+when everyone has this setup, we can add .classpath to the .gitignore file, so we no longer overwrite this.
+
+
+General Information:
+--------------------
+folder		description
+
+lib/		All libraries used in the project are here, and are automatically linked to the project, when you import as existing project
+doc/		here is some documentation about the code and about general stuff like this file you're reading
+res/		contains setting files and a history file
+
+
+
 Eclipse / leJOS plugin:
 =======================
 
