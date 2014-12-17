@@ -6,7 +6,6 @@ Button description
   v			down
 
 
-TERMINATE A PROGRAM
+TERMINATE A PROGRAM:	hold the middle button and down button at the same time
 
-hold the middle button and down button at the same time
-
+RESTART THE ROBOT:		?? forgot the command again :( anyone knows it?

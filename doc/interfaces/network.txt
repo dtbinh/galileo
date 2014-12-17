@@ -1,0 +1,54 @@
+Overall you can use NetworkSettings.get<whatever you need>() to get IPs, PORTs or BUFFER size of the packets
+
+
+src/network/Net.java
+====================
+
+YOU CAN USE THE FOLLOWING FUNCTIONS:
+
+public static void sendACK() {
+				   =======
+	sry, this is currently unimplemented.. will be working tommorrow, thursday 18.12.
+	but feel free to write it inside the code where it is needed
+
+
+public static void sendRobotCmd(String IP, int PORT, int command) {
+				   ============
+	WHY:
+		this is meant to be sending an command to an robot
+		it's a convenent way of sending the robot a command, internally it uses Net.send(String IP, int PORT, byte[] sendData)
+		
+	DESCRIPTION:
+		it puts the int command into a byte[], so you don't have to care about that
+
+	USAGE EXAMPLE:
+		sendRobotCmd(NetworkSettings.getEV2IP(), NetworkSettings.getRobotPort(), 110);
+		// this will let the robot EV2 drive 10 cm forward
+
+
+public static void send(String IP, int PORT, byte[] sendData) {
+				   ====
+	WHY:
+		this is the raw implementation of sending packets
+		
+	DESCRIPTION:
+		it sends the data you have put into the byte[] to the destination you specified
+		
+	USAGE EXAMPLE:
+		send(NetworkSettings.getPcIP(), NetworkSettings.getPcPort(), data...);
+		// this will send a packet to the computer.. it can also be used send
+
+
+public static byte[] receive(int PORT) throws IOException {
+					 =======
+	WHY:
+		to receive packets from the computer, when you are on the robot
+		or receive packets from the robot, when you are on the computer
+	
+	DESCRIPTION:
+		Creates a Socket on the port you specified and waits till it receives some data
+		then it returns the data in an byte[]
+	
+	USAGE EXAMPLE:
+		Net.receive(NetworkSettings.getRobotPort());
+		// waits for a packet from the computer

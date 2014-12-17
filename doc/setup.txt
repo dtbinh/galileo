@@ -1,5 +1,6 @@
+Eclipse / leJOS plugin:
+=======================
 
-Eclipse:
 Default settings for running programs on the robot would be:
 
 Go to: Window - Preferences - leJOS EV3
@@ -8,3 +9,4 @@ Go to: Window - Preferences - leJOS EV3
 	[ ] Use ssh and scp
 	[x] Connect to named brick		Name: <ip.of.robot>
 	[x] Run program after upload
+
