@@ -1,0 +1,28 @@
+COMMAND LINE:
+
+general information can be obtained with
+man git <gitcommand>
+
+# things to do one time!
+
+git clone		clone a repository
+
+
+# general workflow
+
+git status		see the status of your files
+				here you'll see which files aren't tracked, which are modified, and which are ready for committing
+
+git pull		get the newest version from the github repository
+
+git push		push your new version, or new files to the github repository
+
+git add			add a file to github
+
+git rm			removes a file from git
+
+
+# TIPS
+always pull before you start working! maybe someone has already changed something
+before you commit and push your stuff I always do a pull
+always upload your changes when you're done!

@@ -1,0 +1,12 @@
+Button description
+
+~			escape
+  ^			up
+< X > 		left middle right
+  v			down
+
+
+TERMINATE A PROGRAM
+
+hold the middle button and down button at the same time
+

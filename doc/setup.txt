@@ -1,0 +1,10 @@
+
+Eclipse:
+Default settings for running programs on the robot would be:
+
+Go to: Window - Preferences - leJOS EV3
+	set EV3_HOME correctly
+	[ ] Run Tools in seperate JVM
+	[ ] Use ssh and scp
+	[x] Connect to named brick		Name: <ip.of.robot>
+	[x] Run program after upload
