@@ -23,7 +23,7 @@ ACK				= 2		[ACK nr]
  * 
  * sensordata		| 12 byte	| 0.35700002 0.18400002 0.18900001 | valueorder: uss_f uss_rf uss_rb
  * robotCommand		|  2 byte	| 
- * ACK				|  4 byte	| 
+ * ACK				|  ? byte	| 
 
 
 
