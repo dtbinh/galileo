@@ -1,0 +1,8 @@
+network/Net.java:
+	- packet structure currently ignored
+	- ACK logic unimplemented
+	
+Movements:
+	- when telling, drive 10 cm forward, the robot isn't driving 10 cm
+	
+
