@@ -3,14 +3,14 @@ package movement;
 import lejos.hardware.motor.Motor;
 import lejos.robotics.RegulatedMotor;
 
-public class Movement{
+public class Movements{
 	private SensorThread sensorThread;
 	//private ClientThread clThread;
 	private RegulatedMotor leftMotor = Motor.B;
 	private RegulatedMotor rightMotor = Motor.C;
 	private Tachometer tacho = new Tachometer(leftMotor, rightMotor);
 	
-	public Movement() {
+	public Movements() {
 //		clThread = new ClientThread();
 //		clThread.run();
 	}

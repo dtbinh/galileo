@@ -2,14 +2,14 @@ package main;
 
 import java.io.IOException;
 
-import movement.Movement;
+import movement.Movements;
 import network.Net;
 import network.NetworkSettings;
 
 public class ControlClient {
 	
 	public void run() throws IOException {
-		Movement movements = new Movement();
+		Movements movements = new Movements();
 		
 		int input = 8;	// any value between 1 & 100 will just wait for another input
 		
@@ -24,9 +24,10 @@ public class ControlClient {
 			// to drive forward the value of the entry should be between 101 and 200
 			// 101: drive 1 cm forward;.......;200: drive 100 cm forward
 			if ( (101<=input)&&(input<=200) ) {
+				// TODO: start sensorSendingThread
 				movements.driveForward(input-100);
 				Net.sendACK();
-				
+				// TODO: stop sensorSendingThread
 			//to drive backward the value of the entry should be between 201 and 300
 			// 201: drive 1 cm backward;.......;300: drive 100 cm backward
 			} else if ( (201<=input)&&(input<=300) ) {
