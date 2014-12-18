@@ -21,9 +21,9 @@ public class Net {
 
 	public static void send(String IP, int PORT, byte[] sendData) {
 		// check if data part is too big
-		if (sendData.length > NetworkSettings.getBufferSize()) {
+		if (sendData.length > NetSettings.getBufferSize()) {
 			System.err.println("Couldn't send packet, cause it exceeds "
-					+ "the maximum of " + NetworkSettings.getBufferSize());
+					+ "the maximum of " + NetSettings.getBufferSize());
 //			throw new DataPartTooBigException("Maximum of "
 //					+ NetworkSettings.getBufferSize());
 		}
@@ -54,7 +54,7 @@ public class Net {
 	public static byte[] receive(int PORT) throws IOException {
 		// Prepare network
 		DatagramSocket serverSocket = new DatagramSocket(PORT);
-		byte[] receiveData = new byte[NetworkSettings.getBufferSize()];
+		byte[] receiveData = new byte[NetSettings.getBufferSize()];
 		DatagramPacket receivePacket = new DatagramPacket(receiveData,
 				receiveData.length);
 

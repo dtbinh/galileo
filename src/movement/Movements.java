@@ -22,6 +22,13 @@ public class Movements{
 	//3 -> while turning right information about lateral sensors, and front sensor (infrared)
 	//4 -> distance at the end of the function end of function anyway 
 	//5 -> touch sensor (DANGEROUS!!!!) forced end of the function.
+	public void rotate(int angle) {
+		tacho.resetTacho();
+		this.leftMotor.rotate(angle, true);
+		this.rightMotor.rotate(angle, true);
+		
+		System.out.println(tacho.getTachoMedia());
+	}
 	
 	public void driveForward(int distance) {//in cm
 		// moves 36 degree = 0.01 meters aprox.

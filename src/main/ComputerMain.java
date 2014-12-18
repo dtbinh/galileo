@@ -6,27 +6,28 @@ import java.nio.ByteOrder;
 
 import util.ConfigFiles;
 import network.Net;
-import network.NetworkSettings;
+import network.NetSettings;
 
 public class ComputerMain {
-	private static String EV0IP	 = NetworkSettings.getEv0Ip();
-	private static String EV2IP	 = NetworkSettings.getEv2Ip();
-	private static int PCPORT	 = NetworkSettings.getPcPort();
-	private static int ROBOTPORT = NetworkSettings.getRobotPort();
+	private static String EV0IP	 = NetSettings.getEv0Ip();
+	private static String EV2IP	 = NetSettings.getEv2Ip();
+	private static int PCPORT	 = NetSettings.getPcPort();
+	private static int ROBOTPORT = NetSettings.getRobotPort();
 	
 	
 	public static void main(String[] args) throws IOException{
 		ConfigFiles.read();
 		//sensorTest();
 		//printRobotSettings();
-		Net.sendRobotCmd(EV2IP, ROBOTPORT, 105);
+		
+		Net.sendRobotCmd(EV2IP, ROBOTPORT, 127);
 	}
 	
 	/* Note, that you'll need to start the sensorTest on the Robot too ;) */
 	private static void sensorTest() throws IOException {
 		// get memory for saving packets
 		byte[] bytes = new byte[4];
-	    byte[] receiveData = new byte[NetworkSettings.getBufferSize()];
+	    byte[] receiveData = new byte[NetSettings.getBufferSize()];
 	    
 		while(true) {
 			receiveData = Net.receive(PCPORT);

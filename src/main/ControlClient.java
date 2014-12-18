@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import movement.Movements;
 import network.Net;
-import network.NetworkSettings;
+import network.NetSettings;
 
 public class ControlClient {
 	
@@ -17,9 +17,16 @@ public class ControlClient {
 			//0 to stop the client the value should be
 			//0 to stop the current process, while it's running
 			System.out.println("waiting for cmd");
-			int received = Net.receive(NetworkSettings.getRobotPort())[0];
+			int received = Net.receive(NetSettings.getRobotPort())[0];
 			input = received;
 			System.out.println("received: " + received);
+			
+			// just a testing input
+			if(input == 99) {
+				movements.rotate(360);	// turns wheels by 360 degree
+										// wheel has a perimeter of about 18 cm
+										// therefore it should move 18 cm forward
+			}
 			
 			// to drive forward the value of the entry should be between 101 and 200
 			// 101: drive 1 cm forward;.......;200: drive 100 cm forward

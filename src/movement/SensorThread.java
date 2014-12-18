@@ -27,8 +27,6 @@ public class SensorThread extends Thread {
 	
 	
 	public void run() {
-		// create a new client with the UDP Implementation
-		int control = 0;
 		//sensorSampleProvider = touch.getTouchMode();
 		
 		while (true) {

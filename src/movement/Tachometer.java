@@ -16,6 +16,10 @@ public class Tachometer {
 		rightMotor.resetTachoCount();
 	}
 	
+	/**
+	 * Takes tachoCound() from both motors and returns the media 
+	 * returns value: int 
+	 * */
 	public int getTachoMedia(){
 		int left = leftMotor.getTachoCount();
 		int right = rightMotor.getTachoCount();

@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import util.ConfigFiles;
 import network.Net;
-import network.NetworkSettings;
+import network.NetSettings;
 import lejos.hardware.Brick;
 import lejos.hardware.BrickFinder;
 import lejos.hardware.Key;
@@ -15,13 +15,14 @@ import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
 
 public class RobotMain {
-	static String pcIP = NetworkSettings.getPcIP();
-	static int pcPORT  = NetworkSettings.getPcPort();
-	static int portEV3 = NetworkSettings.getPcPort();
+	static String pcIP = NetSettings.getPcIP();
+	static int pcPORT  = NetSettings.getPcPort();
+	static int portEV3 = NetSettings.getPcPort();
 
 	public static void main(String[] args) {
-		ConfigFiles.read();
-		//sensorTest();
+		ConfigFiles.read(); // doesn't work on the robot :(
+		
+//		//sensorTest();
 		
 		ControlClient cc = new ControlClient();
 		
@@ -103,6 +104,12 @@ public class RobotMain {
 		
 		// clear screen
 		LCD.clear();
+	}
+	
+	private static String getNetConfigPathOnRobot() {
+		String dir = System.getProperty("user.dir");
+		String classname = RobotMain.class.getSimpleName();
+		return dir + "/" + classname + ".jar" + "/" + "network/net.properties";
 	}
 
 }
