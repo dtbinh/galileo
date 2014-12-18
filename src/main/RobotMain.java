@@ -1,7 +1,5 @@
 package main;
 
-import java.io.IOException;
-
 import util.ConfigFiles;
 import network.Net;
 import network.NetSettings;
@@ -15,23 +13,17 @@ import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
 
 public class RobotMain {
-	static String pcIP = NetSettings.getPcIP();
-	static int pcPORT  = NetSettings.getPcPort();
-	static int portEV3 = NetSettings.getPcPort();
 
 	public static void main(String[] args) {
 		ConfigFiles.read(); // doesn't work on the robot :(
+							// so, better change the settings directly
+							// in network/NetSettings.java
 		
-//		//sensorTest();
+		//sensorTest();
 		
-		ControlClient cc = new ControlClient();
+		ClientControl cc = new ClientControl();
 		
-		try {
-			cc.run();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		cc.run();
 	}
 	
 	/* if you want to receive the data on the computer to
@@ -94,7 +86,7 @@ public class RobotMain {
 				sendData[i + 8] = (byte) ((ultra_sample_intbits_rb >> ((7 - i) * 8)) & 0xff);
 			
 			// send packet to pc
-			Net.send(pcIP, pcPORT, sendData);
+			Net.send(NetSettings.getPcIp(), NetSettings.getPcPort(), sendData);
 		}
 
 		// Close sensors

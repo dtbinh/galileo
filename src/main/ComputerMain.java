@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import util.CSVFile;
 import util.ConfigFiles;
 import network.Net;
 import network.NetSettings;
@@ -15,7 +16,7 @@ public class ComputerMain {
 	private static int ROBOTPORT = NetSettings.getRobotPort();
 	
 	
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) {
 		ConfigFiles.read();
 		//sensorTest();
 		//printRobotSettings();

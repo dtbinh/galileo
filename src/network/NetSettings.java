@@ -31,6 +31,10 @@ public final class NetSettings {
 	private static int PC_PORT		= 10000;
 	private static int ROBOT_PORT	= 10003;
 	
+	private NetSettings(){
+		// private constructor, so you cannot create an instance of it
+	}
+	
 	// READ CONFIG FILE
 	public static void readConfigFile() {
 		
@@ -78,7 +82,7 @@ public final class NetSettings {
 	// GETTER
 	public static int getBufferSize() { return BUFFER_SIZE; }
 	
-	public static String getPcIP()		{ return PC_IP; }	
+	public static String getPcIp()		{ return PC_IP; }	
 	public static int getPcPort()		{ return PC_PORT; }
 	
 	public static String getEv1Ip() { return EV1_IP; }

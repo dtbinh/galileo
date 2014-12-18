@@ -8,6 +8,10 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 
 public class Net {
+	
+	private Net(){
+		// private constructor, so you cannot create an instance of it
+	}
 
 	public static void sendACK() {
 		// System.out.println("sendACK currently unimplemented");
@@ -24,20 +28,18 @@ public class Net {
 		if (sendData.length > NetSettings.getBufferSize()) {
 			System.err.println("Couldn't send packet, cause it exceeds "
 					+ "the maximum of " + NetSettings.getBufferSize());
-//			throw new DataPartTooBigException("Maximum of "
-//					+ NetworkSettings.getBufferSize());
 		}
 
 		try {
 			// Prepare network
 			DatagramSocket clientSocket = new DatagramSocket();
 			InetAddress IPAddress = InetAddress.getByName(IP);
-			
+
 			// create and send packet
 			DatagramPacket sendPacket = new DatagramPacket(sendData,
 					sendData.length, IPAddress, PORT);
 			clientSocket.send(sendPacket);
-			
+
 			clientSocket.close();
 		} catch (SocketException e) {
 			System.err.println("Couldn't initialize DatagramSocket. "
@@ -51,17 +53,26 @@ public class Net {
 		}
 	}
 
-	public static byte[] receive(int PORT) throws IOException {
-		// Prepare network
-		DatagramSocket serverSocket = new DatagramSocket(PORT);
+	public static byte[] receive(int PORT) {
 		byte[] receiveData = new byte[NetSettings.getBufferSize()];
-		DatagramPacket receivePacket = new DatagramPacket(receiveData,
-				receiveData.length);
 
-		serverSocket.receive(receivePacket);
-		receiveData = receivePacket.getData();
+		try {
+			DatagramSocket serverSocket = new DatagramSocket(PORT);
+			DatagramPacket receivePacket = new DatagramPacket(receiveData,
+					receiveData.length);
 
-		serverSocket.close();
+			serverSocket.receive(receivePacket);
+			receiveData = receivePacket.getData();
+
+			serverSocket.close();
+		} catch (SocketException e) {
+			System.err.println("Couldn't initialize DatagramSocket. "
+					+ e.getMessage());
+		} catch (IOException e) {
+			System.err.println("Error receiving packet on port " + PORT + ". "
+					+ e.getMessage());
+		}
+		
 		return receiveData;
 	}
 }

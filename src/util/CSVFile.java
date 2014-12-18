@@ -12,13 +12,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public final class CSVFile {
+	private static final String[] PACKET_ORDER = new String[] { "robot", "timestamp", "data" };
 	private static String filename = "./res/robotdata.csv";
 	
-	// private constructor, so you cannot create an instance of it
 	private CSVFile(){
+		// private constructor, so you cannot create an instance of it
 	}
 	
-	public static ArrayList<String[]> readComplete() {
+	public static ArrayList<String[]> readComplete(String filename) {
 		ArrayList<String[]> filedata = new ArrayList<String[]>();
 		
 		File file = new File(filename);
@@ -40,25 +41,27 @@ public final class CSVFile {
 		return filedata;
 	}
 
-	public static void write(String packet) {
+	public static void write(String filename, byte[] packetdata) {
 		try {
 			FileWriter writer = new FileWriter(filename, true);
 			
 			 	// check if file already exists / file empty, if so create header
 			File file = new File(filename);
+
+			// create header if file is empty
 			if (file.length() == 0) {
-					// create header
-				String[] packetOrder = UDP_Packet.getOrder();
-				for (String element : packetOrder) {
-					if (!(element == packetOrder[0]))
-						writer.append(',');
+				for (String element : PACKET_ORDER) {
+					if (element == PACKET_ORDER[0])
+						; // do not append a ,
+					writer.append(',');
 					writer.append(element);
 				}
 				writer.append("\r\n");
 			}
 			
 				// write content into file
-			writer.append(packet);
+			writer.append(Packetdata.getContent(packetdata));
+			
 			writer.append("\r\n");
 			
 			writer.flush();
@@ -70,8 +73,8 @@ public final class CSVFile {
 		}
 	}
 	
-	public static void print() {
-		ArrayList<String[]> filecontent = readComplete();
+	public static void print(String filename) {
+		ArrayList<String[]> filecontent = readComplete(filename);
 		
 		for (String[] line : filecontent) {
 			for (String s : line){

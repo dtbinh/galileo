@@ -1,14 +1,12 @@
 package main;
 
-import java.io.IOException;
-
 import movement.Movements;
 import network.Net;
 import network.NetSettings;
 
-public class ControlClient {
+public class ClientControl {
 	
-	public void run() throws IOException {
+	public void run() {
 		Movements movements = new Movements();
 		
 		int input = 8;	// any value between 1 & 100 will just wait for another input
