@@ -1,30 +1,33 @@
-package main;
+package tests;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 
 import util.PacketHandler;
+import network.Net;
 import network.NetSettings;
 
 public class TestingReceive {
+	
 	public static void main(String[] args) throws IOException {
-		boolean run = true;
-		byte[] receiveData = new byte[NetSettings.getPacketSize()];
-		DatagramSocket serverSocket = new DatagramSocket(
-				NetSettings.getPcPort());
+		System.out.println("Listening on port: " + NetSettings.getPcPort());
 		
-		while (run) {
-			DatagramPacket receivePacket = new DatagramPacket(receiveData,
-					receiveData.length);
-
-			serverSocket.receive(receivePacket);
-			System.out.println("From: " + receivePacket.getAddress());
-			
-			receiveData = receivePacket.getData();
-			
-			System.out.println(PacketHandler.getContent(receiveData));
+		if ( TestSettings.networkTestInfoPacket ) {
+			while( true ) {
+				System.out.println(Net.receiveInfo());
+			}			
+		} else {
+			while ( true ) {
+				DatagramPacket receivePacket = Net.receive(NetSettings.getPcPort());
+				System.out.println("From: " + receivePacket.getAddress());
+				System.out.println("  getContent(): " + PacketHandler.getContent(receivePacket.getData()));
+				System.out.println("  getRoboCmd(): " + PacketHandler.getRobotCommand(receivePacket.getData()));
+				System.out.print("  getSenspac(): ");
+				for(int i=0 ; i<3; ++i) {
+					System.out.print(PacketHandler.getSensordata(receivePacket.getData())[0] + " ");
+				}
+				System.out.println();
+			}
 		}
-		serverSocket.close();
 	}
 }
