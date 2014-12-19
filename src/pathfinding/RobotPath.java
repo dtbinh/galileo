@@ -33,7 +33,7 @@ public class RobotPath { // This class implements the general behaviour
 
 	public boolean updateParallelToWall() {
 		try {
-			if (SensorDataAccess.getRightUpperSensor() - SensorDataAccess.getRightDownerSensor() < PARALLELTOWALLERROR) {
+			if (SensorDataAccess.getUss_rf() - SensorDataAccess.getUss_rb() < PARALLELTOWALLERROR) {
 				this.parallelToWall = true;
 				return parallelToWall;
 			}
@@ -137,7 +137,7 @@ public class RobotPath { // This class implements the general behaviour
 			//Net.receive(NetSettings.getPcPort());
 			System.out.println("Received ACK!");
 			try {
-				if (SensorDataAccess.getFrontSensor() < 0.03) { // am i near to an
+				if (SensorDataAccess.getUss_f() < 0.03) { // am i near to an
 																// obstacle?
 					break;
 				}
@@ -162,7 +162,7 @@ public class RobotPath { // This class implements the general behaviour
 			}
 			drivenDistance += 0.01;
 			try {
-				if(util.SensorDataAccess.getFrontSensor() < 0.03) {
+				if(util.SensorDataAccess.getUss_f() < 0.03) {
 					break;
 				}
 			} catch (NoSensorDataAvailableException e) {

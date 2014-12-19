@@ -4,36 +4,41 @@ import exceptions.NoSensorDataAvailableException;
 
 public class SensorDataAccess {
 
-	private static float frontSensor = -1.0f ;
-	private static float rightUpperSensor = -1.0f;
-	private static float rightDownerSensor = -1.0f;
+	private static float uss_f  = -1.0f ;
+	private static float uss_rf = -1.0f;
+	private static float uss_rb = -1.0f;
 	
-	public static float getFrontSensor() throws NoSensorDataAvailableException{
-		if (frontSensor == -1.0f) {
+	// GETTER
+	public static float getUss_f() throws NoSensorDataAvailableException{
+		if (uss_f == -1.0f) {
 			throw new exceptions.NoSensorDataAvailableException("front Sensor");
 		}
-		return frontSensor;
+		return uss_f;
 	}
-	public static void setFrontSensor(float frontSensor) {
-		SensorDataAccess.frontSensor = frontSensor;
-	}
-	public static float getRightUpperSensor() throws NoSensorDataAvailableException {
-		if (rightUpperSensor == -1.0f) {
+
+	public static float getUss_rf() throws NoSensorDataAvailableException {
+		if (uss_rf == -1.0f) {
 			throw new exceptions.NoSensorDataAvailableException("rightUpper Sensor");
 		}
-		return rightUpperSensor;
+		return uss_rf;
 	}
-	public static void setRightUpperSensor(float rightUpperSensor) {
-		SensorDataAccess.rightUpperSensor = rightUpperSensor;
-	}
-	public static float getRightDownerSensor() throws NoSensorDataAvailableException {
-		if (rightDownerSensor == -1.0f) {
+	
+	public static float getUss_rb() throws NoSensorDataAvailableException {
+		if (uss_rb == -1.0f) {
 			throw new exceptions.NoSensorDataAvailableException("rightDowner Sensor");
 		}
-		return rightDownerSensor;
+		return uss_rb;
 	}
-	public static void setRightDownerSensor(float rightDownerSensor) {
-		SensorDataAccess.rightDownerSensor = rightDownerSensor;
+	
+	// SETTER
+	public static void setUss_f(float uss_f) {
+		SensorDataAccess.uss_f = uss_f;
+	}
+	public static void setUss_rf(float uss_rf) {
+		SensorDataAccess.uss_rf = uss_rf;
+	}
+	public static void setUss_rb(float uss_rb) {
+		SensorDataAccess.uss_rb = uss_rb;
 	}
 	
 }
