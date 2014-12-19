@@ -4,7 +4,7 @@ import pathfinding.RobotPath;
 import util.ConfigFiles;
 import util.SensorReceiveThread;
 import mapping.Map;
-import mappingHistory.MappingEV3;
+import mapping.history.MappingEV3;
 
 public class ComputerMain {
 	private static Map map = new Map();

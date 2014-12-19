@@ -1,4 +1,4 @@
-package mappingHistory;
+package mapping.history;
 
 public class MappingEV3Test {
 

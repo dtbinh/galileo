@@ -1,4 +1,4 @@
-package mappingRealtime;
+package mapping.realtime;
 
 public abstract class GameObject {
 	protected float x;

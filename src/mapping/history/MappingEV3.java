@@ -1,4 +1,4 @@
-package mappingHistory;
+package mapping.history;
 
 import java.io.File;
 import java.io.FileInputStream;

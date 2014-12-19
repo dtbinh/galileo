@@ -1,4 +1,4 @@
-package mappingRealtime;
+package mapping.realtime;
 
 import java.util.ArrayList;
 

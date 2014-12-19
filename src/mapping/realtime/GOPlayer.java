@@ -1,4 +1,4 @@
-package mappingRealtime;
+package mapping.realtime;
 
 public class GOPlayer extends GameObject {
 
