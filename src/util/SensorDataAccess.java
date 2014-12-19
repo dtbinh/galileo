@@ -4,9 +4,13 @@ import exceptions.NoSensorDataAvailableException;
 
 public class SensorDataAccess {
 
-	private static float uss_f  = -1.0f ;
+	private static float uss_f  = -1.0f;
 	private static float uss_rf = -1.0f;
 	private static float uss_rb = -1.0f;
+	
+	private SensorDataAccess() {
+		// private constructor, so you cannot create an instance of it
+	}
 	
 	// GETTER
 	public static float getUss_f() throws NoSensorDataAvailableException{

@@ -1,7 +1,7 @@
 package mapping;
 import java.util.ArrayList;
 
-//Ziad Nörpel:
+//Ziad Nï¿½rpel:
 //Map class which inherits from ArrayList
 //this class is basically a two dimensional ArrayList, a ArrayList containing
 //other ArrayLists
@@ -149,16 +149,16 @@ public class Map extends ArrayList<ArrayList<MapObject>>{
 		}
 		}
 		
-		System.out.println("y "+this.y);
-		System.out.println("x "+this.x);
-		System.out.println("width "+this.width);
-		System.out.println("height "+this.height);
-		System.out.println("vectorx "+vector.x);
-		System.out.println("vectory "+vector.y);
+//		System.out.println("y "+this.y);
+//		System.out.println("x "+this.x);
+//		System.out.println("width "+this.width);
+//		System.out.println("height "+this.height);
+//		System.out.println("vectorx "+vector.x);
+//		System.out.println("vectory "+vector.y);
 		
 		if(vector.y>0){
 			for(int i=0;i<vector.y;i++){
-				System.out.println("heightaktiv: "+this.size());
+//				System.out.println("heightaktiv: "+this.size());
 				this.get(this.y+i).set(this.x,wall);
 			}
 			this.y+=vector.y-1;
