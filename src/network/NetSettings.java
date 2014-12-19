@@ -19,8 +19,8 @@ public final class NetSettings {
 	public static final String configFileOnComputer = "./src/network/net.properties";
 	//public static final String configFileOnRobot = "./network/net.properties";
 		// init content with default values, if reading from file wont work
-	private static int BUFFER_SIZE	= 1024;
-	private static String PC_IP				= "141.82.173.143";
+	private static int PACKET_SIZE	= 1024;
+	private static String PC_IP		= "141.82.173.143";
 	
 	private static String EV1_IP	= "141.82.48.201";
 	private static String EV2_IP	= "141.82.48.201";
@@ -48,8 +48,8 @@ public final class NetSettings {
 			// SET VALUES
 
 			// BUFFER
-			String buffersize = properties.getProperty("buffersize");
-			NetSettings.BUFFER_SIZE = Integer.parseInt(buffersize);
+			String packetsize = properties.getProperty("packetsize");
+			NetSettings.PACKET_SIZE = Integer.parseInt(packetsize);
 			
 			// COMPUTER
 			String pcip = properties.getProperty("pcip");
@@ -80,14 +80,14 @@ public final class NetSettings {
 	}
 
 	// GETTER
-	public static int getBufferSize() { return BUFFER_SIZE; }
+	public static int getPacketSize()	{ return PACKET_SIZE; }
 	
 	public static String getPcIp()		{ return PC_IP; }	
 	public static int getPcPort()		{ return PC_PORT; }
 	
-	public static String getEv1Ip() { return EV1_IP; }
-	public static String getEv2Ip() { return EV2_IP; }
-	public static String getEv3Ip() { return EV3_IP; }
-	public static String getEv0Ip() { return EV0_IP; }
+	public static String getEv1Ip()		{ return EV1_IP; }
+	public static String getEv2Ip() 	{ return EV2_IP; }
+	public static String getEv3Ip() 	{ return EV3_IP; }
+	public static String getEv0Ip() 	{ return EV0_IP; }
 	public static int getRobotPort()	{ return ROBOT_PORT; }
 }

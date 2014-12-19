@@ -12,7 +12,7 @@ public class TestingReceive {
 		// CSVFile.write("./res/robotdata.csv", );
 		
 		boolean run = true;
-		byte[] receiveData = new byte[NetSettings.getBufferSize()];
+		byte[] receiveData = new byte[NetSettings.getPacketSize()];
 		DatagramSocket serverSocket = new DatagramSocket(
 				NetSettings.getPcPort());
 		

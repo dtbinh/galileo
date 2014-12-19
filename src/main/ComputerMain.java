@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import util.CSVFile;
 import util.ConfigFiles;
 import network.Net;
 import network.NetSettings;
@@ -28,7 +27,7 @@ public class ComputerMain {
 	private static void sensorTest() throws IOException {
 		// get memory for saving packets
 		byte[] bytes = new byte[4];
-	    byte[] receiveData = new byte[NetSettings.getBufferSize()];
+	    byte[] receiveData = new byte[NetSettings.getPacketSize()];
 	    
 		while(true) {
 			receiveData = Net.receive(PCPORT);
