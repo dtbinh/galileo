@@ -2,6 +2,7 @@ package main;
 
 import pathfinding.RobotPath;
 import util.ConfigFiles;
+import util.SensorReceiveThread;
 import mapping.Map;
 
 public class ComputerMain {
@@ -10,7 +11,8 @@ public class ComputerMain {
 		ConfigFiles.read();
 		//printRobotSettings();
 		
-		new util.SensorReceiveThread().start();
+		// SensorReceiveThread.setPrint(true);		// prints sensor values to console
+		new SensorReceiveThread().start();
 		
 		RobotPath r = new RobotPath();
 		r.run(new Map());

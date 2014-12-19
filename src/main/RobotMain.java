@@ -1,5 +1,7 @@
 package main;
 
+import util.SensorSendingThread;
+
 public class RobotMain {
 
 	public static void main(String[] args) {
@@ -7,7 +9,7 @@ public class RobotMain {
 								// so, better change the settings directly
 								// in network/NetSettings.java
 		
-		new util.SensorSendingThread().start();
+		new SensorSendingThread().start();
 		
 		ClientControl cc = new ClientControl();
 		
