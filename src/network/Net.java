@@ -7,61 +7,12 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+import util.PacketExtractor;
+
 public class Net {
 	
 	private Net(){
 		// private constructor, so you cannot create an instance of it
-	}
-	
-	/**
-	 * <b>Sry, currently unimplemented</b>
-	 */
-	public static void sendACK(String IP, int PORT, int ackNr) {
-		System.out.println("sendACK currently unimplemented");
-		byte[] data = new byte[NetSettings.getPacketSize()];
-		// set type of packet
-		data[0] = 0;
-		// TODO: fill packet
-		send(IP, PORT, data);
-	}
-	
-	/**
-	 * <b>Sry, currently unimplemented</b>
-	 */
-	public static void sendSensordata(String IP, int PORT, float uss_f, float uss_rf, float uss_rb) {
-		System.out.println("sendSensordata currently unimplemented");
-		byte[] data = new byte[NetSettings.getPacketSize()];
-		// set type of packet
-		data[0] = 0;
-		// TODO: fill packet
-		send(IP, PORT, data);
-	}
-	
-	/**
-	 * Convenience way of sending an Robot Command
-	 * <br>Robot commands:
-	 * <br>0:	stop the client or current process
-	 * <br><b>101-200 to DRIVE FORWARD</b>
-	 * <br>101----> drive 1 cm forward
-	 * <br>200----> drive 100 cm forward
-	 * <br><b>201-300 to DRIVE BACKWARD</b>
-	 * <br>201----> drive 1 cm backward
-	 * <br>300----> drive 100 cm backward
-	 * <br><b>301-500 to TURN LEFT</b>
-	 * <br>301----> turn 1 degree left
-	 * <br>500----> turn 200 degrees left
-	 * <br><b>501-700 to TURN RIGHT</b>
-	 * <br>501----> turn 1 degree right
-	 * <br>700----> turn 200 degrees right 
-	 */
-	public static void sendRobotCmd(String IP, int PORT, int command) {
-		byte[] data = new byte[NetSettings.getPacketSize()];
-		// set type of packet
-		data[0] = 1;
-		// fill packet
-		for(int i=0; i < 2; ++i)
-			data[i+1] = (byte) ((command >> (1 - i) * 8) & 0xff);
-		send(IP, PORT, data);
 	}
 	
 	/**
@@ -105,17 +56,16 @@ public class Net {
 		}
 	}
 
-	public static byte[] receive(int PORT) {
+	public static DatagramPacket receive(int PORT) {
 		byte[] receiveData = new byte[NetSettings.getPacketSize()];
+		DatagramPacket receivePacket = new DatagramPacket(receiveData,
+				receiveData.length);
 
 		try {
 			DatagramSocket serverSocket = new DatagramSocket(PORT);
-			DatagramPacket receivePacket = new DatagramPacket(receiveData,
-					receiveData.length);
-
+			
 			serverSocket.receive(receivePacket);
-			receiveData = receivePacket.getData();
-
+			
 			serverSocket.close();
 		} catch (SocketException e) {
 			System.err.println("Couldn't initialize DatagramSocket. "
@@ -125,6 +75,65 @@ public class Net {
 					+ e.getMessage());
 		}
 		
-		return receiveData;
+		return receivePacket;
+	}
+	
+	public static short receiveRobotCmd(int PORT) {
+		DatagramPacket received = receive(PORT);
+		byte[] receivedData = received.getData();
+		String s = PacketExtractor.getContent(receivedData);
+		return Short.parseShort(s);
+	}
+	
+	
+	/**
+	 * <b>Sry, currently unimplemented</b>
+	 */
+	public static void sendACK( ) {//String IP, int PORT, int ackNr) {
+		System.out.println("sendACK currently unimplemented");
+		byte[] data = new byte[NetSettings.getPacketSize()];
+		// set type of packet
+		data[0] = 2;
+		// TODO: fill packet 
+		send(NetSettings.getPcIp(), NetSettings.getPcPort(), data);
+	}
+	
+	/**
+	 * <b>Sry, currently unimplemented</b>
+	 */
+	public static void sendSensordata(String IP, int PORT, float uss_f, float uss_rf, float uss_rb) {
+		System.out.println("sendSensordata currently unimplemented");
+		byte[] data = new byte[NetSettings.getPacketSize()];
+		// set type of packet
+		data[0] = 0;
+		// TODO: fill packet
+		send(IP, PORT, data);
+	}
+	
+	/**
+	 * Convenience way of sending an Robot Command
+	 * <br>Robot commands:
+	 * <br>0:	stop the client or current process
+	 * <br><b>101-200 to DRIVE FORWARD</b>
+	 * <br>101----> drive 1 cm forward
+	 * <br>200----> drive 100 cm forward
+	 * <br><b>201-300 to DRIVE BACKWARD</b>
+	 * <br>201----> drive 1 cm backward
+	 * <br>300----> drive 100 cm backward
+	 * <br><b>301-500 to TURN LEFT</b>
+	 * <br>301----> turn 1 degree left
+	 * <br>500----> turn 200 degrees left
+	 * <br><b>501-700 to TURN RIGHT</b>
+	 * <br>501----> turn 1 degree right
+	 * <br>700----> turn 200 degrees right 
+	 */
+	public static void sendRobotCmd(String IP, int PORT, int command) {
+		byte[] data = new byte[NetSettings.getPacketSize()];
+		// set type of packet
+		data[0] = 1;
+		// fill packet
+		for(int i=0; i < 2; ++i)
+			data[i+1] = (byte) ((command >> (1 - i) * 8) & 0xff);
+		send(IP, PORT, data);
 	}
 }

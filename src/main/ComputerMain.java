@@ -1,10 +1,12 @@
 package main;
 
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 import util.ConfigFiles;
+import util.PacketExtractor;
 import network.Net;
 import network.NetSettings;
 
@@ -30,8 +32,10 @@ public class ComputerMain {
 	    byte[] receiveData = new byte[NetSettings.getPacketSize()];
 	    
 		while(true) {
-			receiveData = Net.receive(PCPORT);
+			DatagramPacket received = Net.receive(PCPORT);
+			receiveData = received.getData();
 			
+//			float[] sensorValues = PacketExtractor.getSensordata(receiveData);
 			for (int i = 0;i<4;i++)
 				bytes[i]=receiveData[i];
 			Float uss_f = ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN).getFloat();
@@ -43,9 +47,12 @@ public class ComputerMain {
 				bytes[i]=receiveData[i+8];
 			Float uss_rb = ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN).getFloat();
 			
-			System.out.print("uss_f:  " + uss_f  + "\t");
+			System.out.print("uss_f:  " + uss_f + "\t");
 			System.out.print("uss_rf: " + uss_rf + "\t");
 			System.out.print("uss_rb: " + uss_rb + "\r\n");
+//			System.out.print("uss_f:  " + sensorValues[0] + "\t");
+//			System.out.print("uss_rf: " + sensorValues[1] + "\t");
+//			System.out.print("uss_rb: " + sensorValues[2] + "\r\n");
 		}
 	}
 	

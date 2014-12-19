@@ -15,7 +15,7 @@ public class ClientControl {
 			//0 to stop the client the value should be
 			//0 to stop the current process, while it's running
 			System.out.println("waiting for cmd");
-			int received = Net.receive(NetSettings.getRobotPort())[0];
+			short received = Net.receiveRobotCmd(NetSettings.getRobotPort());
 			input = received;
 			System.out.println("received: " + received);
 			

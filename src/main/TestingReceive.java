@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-import util.Packetdata;
+import util.PacketExtractor;
 import network.NetSettings;
 
 public class TestingReceive {
@@ -25,7 +25,7 @@ public class TestingReceive {
 			
 			receiveData = receivePacket.getData();
 			
-			System.out.println(Packetdata.getContent(receiveData));
+			System.out.println(PacketExtractor.getContent(receiveData));
 			
 			
 		}
