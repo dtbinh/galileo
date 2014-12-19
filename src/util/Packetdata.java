@@ -3,11 +3,13 @@ package util;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import network.NetSettings;
+
 public class Packetdata {
 	
 	public static void main(String[] args){
-		
-		byte[] sensorPacket = new byte[1024];
+		// teststuff... will be deleted when everything is implemented!
+		byte[] sensorPacket = new byte[NetSettings.getPacketSize()];
 		sensorPacket[0] = 0;
 		for(int i=0; i<4; ++i)
 			sensorPacket[i+1] = (byte)((Float.floatToIntBits((float)0.35700002) >> ((7 - i) * 8)) & 0xff);
@@ -16,21 +18,21 @@ public class Packetdata {
 		for(int i=0; i<4; ++i)
 			sensorPacket[i+9] = (byte)((Float.floatToIntBits((float)0.35700002) >> ((7 - i) * 8)) & 0xff);
 		
-		byte[] robotCmdPacket = new byte[1024];
+		byte[] robotCmdPacket = new byte[NetSettings.getPacketSize()];
 		robotCmdPacket[0] = 1;
-		short s = 32767;
-		short s2 = 127;
+		short s = 12207;//(short) 0b0010_1111_1010_1111;
+		System.out.println(s);
+		for(int i=0; i < 2; ++i)
+			robotCmdPacket[i+1] = (byte) ((s >> (1 - i) * 8) & 0xff);
 		
-//		for(int i=0; i<2; ++i)
-//			robotCmdPacket[i+1] = (byte) ((s >> ((3 - i) * 4)) & 0xff);
-		robotCmdPacket[1] = (byte) (s & 0xff);
-		robotCmdPacket[2] = (byte) ((s & 0xff00)>>8);
-//		for(int i=0; i<2; ++i)
-//			robotCmdPacket[i+5] = (byte) ((s >> ((7 - i) * 8)) & 0xff);
+		byte[] ackPacket = new byte[NetSettings.getPacketSize()];
 		
+		System.out.println("getsensordata");
 		System.out.println(getContent(sensorPacket));
+		System.out.println("getrobotcommand");
 		System.out.println(getContent(robotCmdPacket));
-		
+		System.out.println("getack");
+		System.out.println(getACK(ackPacket));
 	}
 	
 	private Packetdata() {
@@ -61,7 +63,6 @@ public class Packetdata {
 	}
 	
 	private static String getSensordata (byte[] packetbytes) {
-		System.out.println("getsensordata");
 		String str = "";
 		byte[] bytes = new byte[4];
 		
@@ -85,36 +86,23 @@ public class Packetdata {
 	}
 	
 	private static String getRobotCommand (byte[] packetbytes) {
-		System.out.println("getrobotcmd");
-		for(int i=0; i< packetbytes.length; ++i)
-			System.out.print(packetbytes[i]);
-		System.out.println();
 		String str = "";
 		byte[] bytes = new byte[2];
-		for(int i=0; i < 2; ++i)
-			bytes[i] = packetbytes[i+1];
+		for(int i=1; i <= 2; ++i)
+			bytes[i-1] = packetbytes[i];
+		//System.out.println(bytes[1]);
 		int robotCmd = ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN).getShort();
 		str += robotCmd;
 		return str;
 	}
 	
-	private static String getACK (byte[] packetbytes) {
-		System.out.println("getack");
-		String str = "";
-		return str;
-	}
-	
 	/**
-	 * Returns the values Byte by Byte ( interpreted as bytes )
-	 * @param bytes	byte array containing data
-	 * @return		content interpreted as bytes
+	 * <br>Sry, currently unimplemented!</br>
+	 * @param packetbytes
+	 * @return
 	 */
-	public static String getByteByByte (byte[] bytes) {
+	private static String getACK (byte[] packetbytes) {
 		String str = "";
-		for(int i=0; i<bytes.length; ++i) {
-			str += bytes[i];
-		}
 		return str;
 	}
-
 }
