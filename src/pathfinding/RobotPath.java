@@ -16,6 +16,8 @@ public class RobotPath { // This class implements the general behaviour
 	private RobotLocation myLocation;
 
 	private final float PARALLELTOWALLERROR = 0.02f;
+	
+	private final float CONTACTERROR = 0.1f;
 
 	private boolean hasMapSize;
 
@@ -61,13 +63,14 @@ public class RobotPath { // This class implements the general behaviour
 
 	public void run(Map m) {
 		
-		turnToParallel();
+		System.out.println("[Robot]: Let's have a look at this room...");
 
-		waitingForACK = false;
-
-		
 		driveTillContact(); // now i should be at an obstacle
+		
+		System. out.println("[Robot]: Hey, this could be the wall!");
+		
 		turnToParallel(); // now i should be parallel to an obstacle
+		
 		driveTillContact(); // now i should be at a corner
 		// now i am at a corner and ready to relocate myself
 		
@@ -76,13 +79,18 @@ public class RobotPath { // This class implements the general behaviour
 		myLocation = new RobotLocation(m);
 		this.hasMapSize = false;
 		
+		System.out.println("[Robot]: OK, I think this is an edge of the room.");
+		System.out.println("[Computer]: OK, I start calculating the map here.");
+		
 		while(this.hasMapSize==false) {
 			double angle = this.turnToParallel();
 			double length = this.driveAndCountTacho();
+			System.out.println("[Robot]: Got " + length + " centimeters in " + angle + " direction.");
 			myLocation.move(angle, length);
-			if(this.myLocation.getRelativeToStart().x == 0 && this.myLocation.getRelativeToStart().y == 0) {//TODO: Insert value error here
-				break;
-			}
+			System.out.println("[Laptop]: Perfect, got a new Vector for the map.");
+			//if(this.myLocation.getRelativeToStart().x == 0 && this.myLocation.getRelativeToStart().y == 0) {//TODO: Insert value error here
+				//break;
+			//}
 			
 		}
 		
@@ -135,9 +143,8 @@ public class RobotPath { // This class implements the general behaviour
 		while (true) {
 			Net.sendRobotCmd(NetSettings.getEv2Ip(),NetSettings.getRobotPort(), 101); // drive 1 cm forward
 			//Net.receive(NetSettings.getPcPort());
-			System.out.println("Received ACK!");
 			try {
-				if (SensorDataAccess.getUss_f() < 0.03) { // am i near to an
+				if (SensorDataAccess.getUss_f() < this.CONTACTERROR) { // am i near to an
 																// obstacle?
 					break;
 				}
@@ -156,10 +163,6 @@ public class RobotPath { // This class implements the general behaviour
 		double drivenDistance = 0.0d;
 		while(true) {
 			Net.sendRobotCmd(NetSettings.getEv2Ip(), NetSettings.getRobotPort(), 101);
-			this.waitingForACK = true;
-			while(this.waitingForACK == true) {
-				; // waiting for ACK
-			}
 			drivenDistance += 0.01;
 			try {
 				if(util.SensorDataAccess.getUss_f() < 0.03) {

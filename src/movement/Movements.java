@@ -26,8 +26,8 @@ public class Movements{
 		//one full rotation (360 degrees) is about 18 centimeters,
 		//thats how the rotating angle is computed
 		int rotateAngle=(distance*360)/18;
-		this.leftMotor.rotate(-rotateAngle, true);
-		this.rightMotor.rotate(-rotateAngle, true);
+		this.leftMotor.rotate(rotateAngle, true);
+		this.rightMotor.rotate(rotateAngle, true);
 
 	}
 	// distance in cm
@@ -35,8 +35,8 @@ public class Movements{
 		//one full rotation (360 degrees) is about 18 centimeters,
 		//thats how the rotating angle is computed
 		int rotateAngle=(distance*360)/18;
-		this.leftMotor.rotate(rotateAngle, true);
-		this.rightMotor.rotate(rotateAngle, true);
+		this.leftMotor.rotate(-rotateAngle, true);
+		this.rightMotor.rotate(-rotateAngle, true);
 		
 	}
 	
