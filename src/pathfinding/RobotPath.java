@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import util.CSVFile;
-import main.Main_Computer;
 import mapping.Map;
 import network.Net;
 import network.NetSettings;
-import network.client.RobotCommand;
-import network.server.Server;
 
 public class RobotPath { // This class implements the general behaviour
 							// (pathfinding) of our robots
@@ -133,15 +130,8 @@ public class RobotPath { // This class implements the general behaviour
 										// from the wall
 		
 		while (true) {
-			myServer.send(101); // drive 1 cm forward
-			//this.waitingForACK = true;
-			Main_Computer.waitForAck = true;
-			System.out.println("Waiting for ACK...");
-			//while (this.waitingForACK == true) {
-			while (Main_Computer.waitForAck == true) {
-				System.out.println(Main_Computer.waitForAck + " waiting...");
-				;// waiting for ACK
-			}
+			Net.sendRobotCmd(NetSettings.getEv2Ip(),NetSettings.getRobotPort(), 101); // drive 1 cm forward
+			//Net.receive(NetSettings.getPcPort());
 			System.out.println("Received ACK!");
 			if (this.currentSensorData().get(2) < 0.03) { // am i near to an
 															// obstacle?
