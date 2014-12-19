@@ -51,8 +51,8 @@ public class MappingEV3 extends Thread {
 	
 	public static Texture loadTexture(String key) {
 		try {
-			return TextureLoader.getTexture("jpg", new FileInputStream(
-					new File("res/" + key + ".jpg")));
+			return TextureLoader.getTexture("png", new FileInputStream(
+					new File("res/" + key + ".png")));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,7 +67,7 @@ public class MappingEV3 extends Thread {
 
 	private static void gameLoop() {
 
-		Texture wood = loadTexture("patrick");
+		Texture wood = loadTexture("wood");
 		
 		Camera cam = new Camera(70, (float) Display.getWidth()
 				/ (float) Display.getHeight(), 0.3f, 1000);
