@@ -5,7 +5,7 @@ import java.nio.ByteOrder;
 
 import network.NetSettings;
 
-public class PacketExtractor {
+public class PacketHandler {
 	
 	public static void main(String[] args){
 		// teststuff... will be deleted when everything is implemented!
@@ -35,7 +35,7 @@ public class PacketExtractor {
 		System.out.println(getACK(ackPacket));
 	}
 	
-	private PacketExtractor() {
+	private PacketHandler() {
 		// private constructor, so you cannot create an instance of it
 	}
 	
@@ -115,5 +115,30 @@ public class PacketExtractor {
 	private static String getACK (byte[] packetbytes) {
 		String str = "";
 		return str;
+	}
+	
+	//------------------------------------------------------
+	
+	public static byte[] makeRobotCommandPacket(short robotCommand) {
+		byte[] robotCmdPacket = new byte[NetSettings.getPacketSize()];
+		// set type of packet
+		robotCmdPacket[0] = 1;
+		// fill packet
+		for(int i=0; i < 2; ++i)
+			robotCmdPacket[i+1] = (byte) ((robotCommand >> (1 - i) * 8) & 0xff);
+		return robotCmdPacket;
+	}
+	
+	public static byte[] makeSensorPacket(float uss_f, float uss_rf, float uss_rb) {
+		byte[] sensordataArr = new byte[NetSettings.getPacketSize()];
+		sensordataArr[0] = 0;		// set type of packet
+		// fill packet
+		for(int i=0; i<4; ++i)
+			sensordataArr[i+1] = (byte)((Float.floatToIntBits(uss_f)  >> ((7 - i) * 8)) & 0xff);
+		for(int i=0; i<4; ++i)
+			sensordataArr[i+5] = (byte)((Float.floatToIntBits(uss_rf) >> ((7 - i) * 8)) & 0xff);
+		for(int i=0; i<4; ++i)
+			sensordataArr[i+9] = (byte)((Float.floatToIntBits(uss_rb) >> ((7 - i) * 8)) & 0xff);
+		return sensordataArr;
 	}
 }
