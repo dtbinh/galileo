@@ -22,7 +22,7 @@ public class ComputerMain {
 		//sensorTest();
 		//printRobotSettings();
 		
-		Net.sendRobotCmd(EV2IP, ROBOTPORT, 127);
+		Net.sendRobotCmd(EV2IP, ROBOTPORT, 99);
 	}
 	
 	/* Note, that you'll need to start the sensorTest on the Robot too ;) */
