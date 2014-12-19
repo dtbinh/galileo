@@ -20,7 +20,7 @@ public final class NetSettings {
 	//public static final String configFileOnRobot = "./network/net.properties";
 		// init content with default values, if reading from file wont work
 	private static int PACKET_SIZE	= 1024;
-	private static String PC_IP		= "141.82.173.143";
+	private static String PC_IP		= "141.82.171.210";
 	
 	private static String EV1_IP	= "141.82.48.201";
 	private static String EV2_IP	= "141.82.48.201";

@@ -22,7 +22,8 @@ public class SensorReceiveThread extends Thread {
 			SensorDataAccess.setUss_rf(sensorValues[1]);
 			SensorDataAccess.setUss_rb(sensorValues[2]);
 			
-			if (print) {
+			if (true) {
+				System.out.println();
 				System.out.print("uss_f:  " + sensorValues[0] + "\t");
 				System.out.print("uss_rf: " + sensorValues[1] + "\t");
 				System.out.print("uss_rb: " + sensorValues[2] + "\r\n");
