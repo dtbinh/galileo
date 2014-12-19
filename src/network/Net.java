@@ -16,8 +16,25 @@ public class Net {
 	/**
 	 * <b>Sry, currently unimplemented</b>
 	 */
-	public static void sendACK() {
+	public static void sendACK(String IP, int PORT, int ackNr) {
 		System.out.println("sendACK currently unimplemented");
+		byte[] data = new byte[NetSettings.getPacketSize()];
+		// set type of packet
+		data[0] = 0;
+		// TODO: fill packet
+		send(IP, PORT, data);
+	}
+	
+	/**
+	 * <b>Sry, currently unimplemented</b>
+	 */
+	public static void sendSensordata(String IP, int PORT, float uss_f, float uss_rf, float uss_rb) {
+		System.out.println("sendSensordata currently unimplemented");
+		byte[] data = new byte[NetSettings.getPacketSize()];
+		// set type of packet
+		data[0] = 0;
+		// TODO: fill packet
+		send(IP, PORT, data);
 	}
 	
 	/**
@@ -40,7 +57,7 @@ public class Net {
 	public static void sendRobotCmd(String IP, int PORT, int command) {
 		byte[] data = new byte[NetSettings.getPacketSize()];
 		// set type of packet
-		data[0] = 1;		
+		data[0] = 1;
 		// fill packet
 		for(int i=0; i < 2; ++i)
 			data[i+1] = (byte) ((command >> (1 - i) * 8) & 0xff);

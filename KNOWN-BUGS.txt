@@ -1,13 +1,19 @@
 network/Net.java:
-	- packet structure currently ignored
 	- ACK logic unimplemented
-	
-net.properties:
-	- canno't be read, when running on the robot...
-		this is because eclipse/leJOS only puts the src folder into
-		the .jar which is uploaded to the robot..
+	- convenience function for sending ack and sensorvalues unimplemented
 	
 Movements:
 	- when telling, drive 10 cm forward, the robot isn't driving 10 cm
 	
+	
+util/Packetdata.java:
+	- convenience function for reading acknowledgement packets unimplemented
+	
 
+
+# currently unimportant
+# use network/NetSettings.java instead ;)
+net.properties:
+	- canno't be read, when running on the robot...
+		this is because eclipse/leJOS only puts the src folder into
+		the .jar which is uploaded to the robot..
