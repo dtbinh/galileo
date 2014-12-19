@@ -91,7 +91,7 @@ public class Net {
 	 * <b>Sry, currently unimplemented</b>
 	 */
 	public static void sendACK( ) {//String IP, int PORT, int ackNr) {
-		System.out.println("sendACK currently unimplemented");
+		//System.out.println("sendACK currently unimplemented");
 		byte[] data = new byte[NetSettings.getPacketSize()];
 		// set type of packet
 		data[0] = 2;

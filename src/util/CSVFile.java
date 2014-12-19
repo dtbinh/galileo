@@ -60,7 +60,7 @@ public final class CSVFile {
 			}
 			
 				// write content into file
-			writer.append(PacketExtractor.getContent(packetdata));
+			writer.append(PacketHandler.getContent(packetdata));
 			
 			writer.append("\r\n");
 			
