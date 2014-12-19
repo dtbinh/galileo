@@ -53,7 +53,8 @@ public class RobotLocation {
 		this.currentTotalAngle += d ; // get orientation in room
 		double deltaX = r * Math.cos(currentTotalAngle/180*Math.PI);
 		double deltaY = r * Math.sin(currentTotalAngle/180*Math.PI); // use addition theorems
-		this.lastPassedWay = new TestVector((int)(deltaX*100),(int)(deltaY*100)); // in cm and int
+		this.lastPassedWay = new TestVector((int)(deltaX*100),(int)(deltaY*100));
+		System.out.println(deltaX + " " + deltaY);// in cm and int
 		myMap.updateMapFromVectors(lastPassedWay);
 		this.relativeToStart = new TestVector(relativeToStart.x + lastPassedWay.x, relativeToStart.y + lastPassedWay.y);
 		

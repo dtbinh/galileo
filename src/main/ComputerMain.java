@@ -4,18 +4,28 @@ import pathfinding.RobotPath;
 import util.ConfigFiles;
 import util.SensorReceiveThread;
 import mapping.Map;
+import mappingHistory.MappingEV3;
 
 public class ComputerMain {
+	private static Map map = new Map();
+	private static boolean fromHistory = true;
 	
 	public static void main(String[] args) {
 		ConfigFiles.read();
 		//printRobotSettings();
 		
-		// SensorReceiveThread.setPrint(true);		// prints sensor values to console
+		SensorReceiveThread.setPrint(true);		// prints sensor values to console
 		new SensorReceiveThread().start();
 		
+		if (fromHistory)
+			new MappingEV3().start();
+		
 		RobotPath r = new RobotPath();
-		r.run(new Map());
+		r.run(map);
+	}
+	
+	public static Map getMap() {
+		return ComputerMain.map;
 	}
 	
 	private static void printRobotSettings() {

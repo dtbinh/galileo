@@ -7,8 +7,12 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import main.ComputerMain;
+import mapping.Map;
 import mapping.MapObject;
 //import main.Main_Computer;
+
+
 
 
 
@@ -29,24 +33,25 @@ public class MappingEV3 extends Thread {
 
 	// static Map a = Main_Computer.getMap();// ;new mapping.MapTestingClass();
 
-	public static mapping.MapTestingClass a = new mapping.MapTestingClass();
+	//public static mapping.MapTestingClass a = new mapping.MapTestingClass();
+	public static Map map = ComputerMain.getMap();
 
-	// public void run() {
-	// initDisplay();
-	// initGL();
-	// gameLoop();
-	// cleanUp();
-	// }
+	 public void run() {
+	 initDisplay();
+	 initGL();
+	 gameLoop();
+	 cleanUp();
+	 }
 
 	// old main -> now as thread
 
-	public static void main(String[] args) {
-		// System.out.println(a.map.toString());
-		initDisplay();
-		initGL();
-		gameLoop();
-		cleanUp();
-	}
+//	public static void main(String[] args) {
+//		// System.out.println(a.map.toString());
+//		initDisplay();
+//		initGL();
+//		gameLoop();
+//		cleanUp();
+//	}
 	
 	
 	public static Texture loadTexture(String key) {
@@ -119,21 +124,21 @@ public class MappingEV3 extends Thread {
 			int var1 = 0;
 			int var2 = -1;
 			// glRotatef(rotation, 1, 1, 0);
-			for (int y = a.map.size() - 1; y >= 0; --y) {
+			for (int y = map.size() - 1; y >= 0; --y) {
 				var2++;
-				for (int x = 0; x < a.map.get(y).size(); x++) {
+				for (int x = 0; x < map.get(y).size(); x++) {
 
-					if (a.map.get(y).get(x) == MapObject.WALL) {
+					if (map.get(y).get(x) == MapObject.WALL) {
 						glColor3f(1f, 0f, 0f);
 
 						drawRect(var1 + (SIZE + 5), var2 + (SIZE + 5), SIZE, SIZE,
 								drawingIt);
-					} else if (a.map.get(y).get(x) == MapObject.OBSTACLE) {
+					} else if (map.get(y).get(x) == MapObject.OBSTACLE) {
 						glColor3f(0f, 1f, 0f);
 						// position 1, position 2, breite, hoehe, true
 						drawRect(var1 + (SIZE + 5), var2 + (SIZE + 5), SIZE, SIZE,
 								drawingIt);
-					} else if (a.map.get(y).get(x) == MapObject.EMPTY) {
+					} else if (map.get(y).get(x) == MapObject.EMPTY) {
 						glColor3f(0f, 0f, 1f);
 						drawRect(var1 + (SIZE + 5), var2 + (SIZE + 5), SIZE, SIZE, 
 								drawingIt);
