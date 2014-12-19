@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
+import util.Packetdata;
 import network.NetSettings;
 
 public class TestingReceive {
@@ -20,13 +21,11 @@ public class TestingReceive {
 					receiveData.length);
 
 			serverSocket.receive(receivePacket);
-			System.out.println(receivePacket.getAddress());
-			System.out.println(receivePacket.getPort());
+			System.out.println("From: " + receivePacket.getAddress());
 			
 			receiveData = receivePacket.getData();
-			for(int i=0; i<receivePacket.getLength(); ++i) {
-				System.out.print(receiveData[i]);
-			}
+			
+			System.out.println(Packetdata.getContent(receiveData));
 			
 			
 		}
