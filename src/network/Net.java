@@ -15,6 +15,8 @@ public class Net {
 		// private constructor, so you cannot create an instance of it
 	}
 	
+	//-------------R A W   S E N D / R E C E I V E   M E T H O D S -----------
+	
 	/**
 	 * Raw sending implementation
 	 * <br>May you want to use the convenience functions?
@@ -29,8 +31,9 @@ public class Net {
 	public static void send(String IP, int PORT, byte[] sendData) {
 		// check if data part is too big
 		if (sendData.length > NetSettings.getPacketSize()) {
-			System.err.println("Couldn't send packet, cause it exceeds "
-					+ "the maximum of " + NetSettings.getPacketSize());
+			int lost = sendData.length - NetSettings.getPacketSize();
+			System.err.println("Lost " + lost + " bytes, cause data exceeds "
+					+ "the maximum packetsize of " + NetSettings.getPacketSize());
 		}
 
 		try {
@@ -78,6 +81,13 @@ public class Net {
 		return receivePacket;
 	}
 	
+	//------------- C O N V E N I E N C E   M E T H O D S --------------------
+	
+	/**
+	 * Convenience way of receiving a robot command
+	 * @param PORT	on which receiver listens,	use NetSettings.get...Port() if you can
+	 * @return	short robotCommand
+	 */
 	public static short receiveRobotCmd(int PORT) {
 		DatagramPacket received = receive(PORT);
 		byte[] receivedData = received.getData();
@@ -85,27 +95,21 @@ public class Net {
 		return Short.parseShort(s);
 	}
 	
-	
-	
-	/**
-	 * <b>Sry, currently unimplemented</b>
-	 */
-	public static void sendACK( ) {//String IP, int PORT, int ackNr) {
-		//System.out.println("sendACK currently unimplemented");
-		byte[] data = new byte[NetSettings.getPacketSize()];
-		// set type of packet
-		data[0] = 2;
-		// TODO: fill packet 
-		send(NetSettings.getPcIp(), NetSettings.getPcPort(), data);
-	}
+
 	
 	/**
-	 * Convenience way of sending sensorData
+	 * Convenience way of sending sensor data
+	 * @param IP		receiver's IP address,		use NetSettings.get...Ip() if you can
+	 * @param PORT		on which receiver listens,	use NetSettings.get...Port() if you can
+	 * @param uss_f		ultrasonic sensor front
+	 * @param uss_rf	ultrasonic sensor right front
+	 * @param uss_rb	ultrasonic sensor right back
 	 */
 	public static void sendSensordata(String IP, int PORT, float uss_f, float uss_rf, float uss_rb) {
 		byte[] sensorPacket = PacketHandler.makeSensorPacket(uss_f, uss_rf, uss_rb);
 		send(IP, PORT, sensorPacket);
 	}
+	
 	
 	/**
 	 * Convenience way of sending an Robot Command
@@ -123,9 +127,54 @@ public class Net {
 	 * <br><b>501-700 to TURN RIGHT</b>
 	 * <br>501----> turn 1 degree right
 	 * <br>700----> turn 200 degrees right 
+	 * @param IP		receiver's IP address,		use NetSettings.get...Ip() if you can
+	 * @param PORT		on which receiver listens,	use NetSettings.get...Port() if you can
+	 * @param command	is actually a short value	range(-32768 ... 32767)
+	 * 					have a look at the table above
 	 */
 	public static void sendRobotCmd(String IP, int PORT, int command) {
 		byte[] data = PacketHandler.makeRobotCommandPacket((short)command);
 		send(IP, PORT, data);
+	}
+	
+	
+	/**
+	 * <b>Sry, currently unimplemented</b>
+	 * Convenience way of sending an ACKnowledgement packet
+	 */
+	public static void sendACK( ) {//String IP, int PORT, int ackNr) {
+		//System.out.println("sendACK currently unimplemented");
+		byte[] data = new byte[NetSettings.getPacketSize()];
+		// set type of packet
+		data[0] = 2;
+		// TODO: fill packet 
+		send(NetSettings.getPcIp(), NetSettings.getPcPort(), data);
+	}
+	
+	//------------- I N F O   P A C K E T   M E T H O D S --------------------
+	
+	/**
+	 * <b>Do not use this for controlling anything.</b>
+	 * <br>Just use it for information you want to have being printed on the other device
+	 * <br>Port is automatically set to NetSettings.getInfoPort()
+	 * @param IP	receiver's ip address, use NetSettings.get...Ip() if you can
+	 * @param info	String containing info, <b>maximum of 64 bytes</b>
+	 */
+	public static void sendInfo(String IP, String info) {
+		send(IP, NetSettings.getInfoPort(), info.getBytes());
+	}
+	
+	/**
+	 * <b>Do not use this for controlling anything.</b>
+	 * <br>Just use it for information you want to have being printed on the other device
+	 * <br>Port is automatically set to NetSettings.getInfoPort()
+	 */
+	public static String receiveInfo() {
+		String info = "";
+		DatagramPacket receivedPacket = receive(NetSettings.getInfoPort());
+		byte[] data = receivedPacket.getData();
+		for(int i=0; i<receivedPacket.getLength(); ++i)
+			info += (char)data[i];
+		return info;
 	}
 }
