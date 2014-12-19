@@ -1,12 +1,9 @@
 network/Net.java:
 	- ACK logic unimplemented
-	- convenience function for sending ack and sensorvalues unimplemented
-	
-Movements:
-	- when telling, drive 10 cm forward, the robot isn't driving 10 cm
+	- convenience function for sending ACKs unimplemented
 	
 	
-util/Packetdata.java:
+util/PacketHandler.java:
 	- convenience function for reading acknowledgement packets unimplemented
 	
 

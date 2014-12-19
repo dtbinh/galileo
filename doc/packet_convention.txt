@@ -1,5 +1,5 @@
 This relates to the data part of network stuff
-it is stored in a byte[]
+data is stored and send inside a byte[]
 
 
 PACKET STRUCTURE:
@@ -19,21 +19,13 @@ ACK				= 2		[ACK nr]
 
  * NAME				| SIZE		| EXAMPLE	| NOTE
  * =================+===========+===========+=======================================================
- * type of packet	|  1 byte	| 0			| the value 0 tell's that the packet contains sensordata
+ * type of packet	|  1 byte	| 0			| used to identify which type of packet is send/received
  * 
- * sensordata		| 12 byte	| 0.35700002 0.18400002 0.18900001 | valueorder: uss_f uss_rf uss_rb
- * robotCommand		|  2 byte	| 
- * ACK				|  ? byte	| 
-
-
-
-
-###########################################################
-#########      Explaination of abbreviations     #########
-#########################################################
-###
-### uss		:	ultra sonic sensor
-### rf		:	right front
-### rb		:	right back
-###	f		:	front
+ * sensordata		| 12 byte	| 0.35700002| valueorder: uss_f uss_rf uss_rb
+ *								| 0.18400002| 
+ *								| 0.18900001| 
+ * robotCommand		|  2 byte	| 118		| drive 18 cm forward
+ * 					|  4 byte	| <ACK nr>	| acknowledgment nr, which is expected to be received 
+ *											| after movement is finished
+ * ACK				|  4 byte	| <ACK nr>	| 
 

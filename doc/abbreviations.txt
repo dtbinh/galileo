@@ -1,0 +1,9 @@
+###########################################################
+#########      Explaination of abbreviations     #########
+#########################################################
+###
+### uss		:	ultra sonic sensor
+### rf		:	right front
+### rb		:	right back
+###	f		:	front
+### ACK		:	acknowledgment
