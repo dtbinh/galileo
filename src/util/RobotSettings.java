@@ -2,12 +2,12 @@ package util;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.util.Properties;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Properties;
 
 public class RobotSettings {
-	public static final String propertiesFile = "./res/robot.properties";
+	public static final String configFilePath = "./res/robot.properties";
 	
 	private static String motorA = "nothing";
 	private static String motorB = "wheel_left";
@@ -24,7 +24,7 @@ public class RobotSettings {
 		Properties properties = new Properties();
 		try {
 			BufferedInputStream stream = new BufferedInputStream(
-					new FileInputStream(propertiesFile));
+					new FileInputStream(configFilePath));
 			properties.load(stream);
 			stream.close();
 
@@ -43,13 +43,11 @@ public class RobotSettings {
 			RobotSettings.S4 = properties.getProperty("sensor4");
 			
 		} catch (FileNotFoundException e) {
-			System.err.println("Couldn't read '" + propertiesFile + "'");
-			System.err
-					.println("  Using default values instead! You can change them in the,\r\n"
-						   + "  file network/NetworkSettings.. but that's not recommended");
+			System.err.println("Couldn't read '"+ configFilePath +"'");
+			System.err.println("Using default values");
 		} catch (IOException e) {
 			System.err.println("IOException while reading properties file '"
-					+ propertiesFile + "'\r\n  Message: " + e.getMessage());
+					+ configFilePath + "'\r\n  Message: " + e.getMessage());
 		}
 	}
 	
