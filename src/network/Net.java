@@ -7,7 +7,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import util.PacketExtractor;
+import util.PacketHandler;
 
 public class Net {
 	
@@ -81,9 +81,10 @@ public class Net {
 	public static short receiveRobotCmd(int PORT) {
 		DatagramPacket received = receive(PORT);
 		byte[] receivedData = received.getData();
-		String s = PacketExtractor.getContent(receivedData);
+		String s = PacketHandler.getContent(receivedData);
 		return Short.parseShort(s);
 	}
+	
 	
 	
 	/**
@@ -99,15 +100,11 @@ public class Net {
 	}
 	
 	/**
-	 * <b>Sry, currently unimplemented</b>
+	 * Convenience way of sending sensorData
 	 */
 	public static void sendSensordata(String IP, int PORT, float uss_f, float uss_rf, float uss_rb) {
-		System.out.println("sendSensordata currently unimplemented");
-		byte[] data = new byte[NetSettings.getPacketSize()];
-		// set type of packet
-		data[0] = 0;
-		// TODO: fill packet
-		send(IP, PORT, data);
+		byte[] sensorPacket = PacketHandler.makeSensorPacket(uss_f, uss_rf, uss_rb);
+		send(IP, PORT, sensorPacket);
 	}
 	
 	/**
@@ -128,12 +125,7 @@ public class Net {
 	 * <br>700----> turn 200 degrees right 
 	 */
 	public static void sendRobotCmd(String IP, int PORT, int command) {
-		byte[] data = new byte[NetSettings.getPacketSize()];
-		// set type of packet
-		data[0] = 1;
-		// fill packet
-		for(int i=0; i < 2; ++i)
-			data[i+1] = (byte) ((command >> (1 - i) * 8) & 0xff);
+		byte[] data = PacketHandler.makeRobotCommandPacket((short)command);
 		send(IP, PORT, data);
 	}
 }

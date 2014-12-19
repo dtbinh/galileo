@@ -4,13 +4,11 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-import util.PacketExtractor;
+import util.PacketHandler;
 import network.NetSettings;
 
 public class TestingReceive {
 	public static void main(String[] args) throws IOException {
-		// CSVFile.write("./res/robotdata.csv", );
-		
 		boolean run = true;
 		byte[] receiveData = new byte[NetSettings.getPacketSize()];
 		DatagramSocket serverSocket = new DatagramSocket(
@@ -25,9 +23,7 @@ public class TestingReceive {
 			
 			receiveData = receivePacket.getData();
 			
-			System.out.println(PacketExtractor.getContent(receiveData));
-			
-			
+			System.out.println(PacketHandler.getContent(receiveData));
 		}
 		serverSocket.close();
 	}
