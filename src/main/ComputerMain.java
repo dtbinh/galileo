@@ -5,8 +5,10 @@ import java.net.DatagramPacket;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import pathfinding.RobotPath;
 import util.ConfigFiles;
 import util.PacketExtractor;
+import mapping.Map;
 import network.Net;
 import network.NetSettings;
 
@@ -22,7 +24,8 @@ public class ComputerMain {
 		//sensorTest();
 		//printRobotSettings();
 		
-		Net.sendRobotCmd(EV2IP, ROBOTPORT, 99);
+		RobotPath r = new RobotPath();
+		r.run(new Map());
 	}
 	
 	/* Note, that you'll need to start the sensorTest on the Robot too ;) */

@@ -3,7 +3,9 @@ package pathfinding;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import exceptions.NoSensorDataAvailableException;
 import util.CSVFile;
+import util.SensorDataAccess;
 import mapping.Map;
 import network.Net;
 import network.NetSettings;
@@ -30,9 +32,14 @@ public class RobotPath { // This class implements the general behaviour
 	}
 
 	public boolean updateParallelToWall() {
-		if (this.currentSensorData().get(0) - this.currentSensorData().get(1) < PARALLELTOWALLERROR) {
-			this.parallelToWall = true;
-			return parallelToWall;
+		try {
+			if (SensorDataAccess.getRightUpperSensor() - SensorDataAccess.getRightDownerSensor() < PARALLELTOWALLERROR) {
+				this.parallelToWall = true;
+				return parallelToWall;
+			}
+		} catch (NoSensorDataAvailableException e) {
+			System.out.println("Currently no reasonable data on " + e.sensorString);
+			e.printStackTrace();
 		}
 		this.parallelToWall = false;
 		return parallelToWall;
@@ -80,10 +87,6 @@ public class RobotPath { // This class implements the general behaviour
 		}
 		
 
-		ArrayList<Float> fromSensor = this.currentSensorData();
-		// commandBuffer.add(RobotCommand.TTW);
-		// commandBuffer.add(RobotCommand.DF);
-		// commandBuffer.add(RobotCommand.TTW);
 
 		while (this.hasMapSize = false) {
 			
@@ -133,9 +136,14 @@ public class RobotPath { // This class implements the general behaviour
 			Net.sendRobotCmd(NetSettings.getEv2Ip(),NetSettings.getRobotPort(), 101); // drive 1 cm forward
 			//Net.receive(NetSettings.getPcPort());
 			System.out.println("Received ACK!");
-			if (this.currentSensorData().get(2) < 0.03) { // am i near to an
-															// obstacle?
-				break;
+			try {
+				if (SensorDataAccess.getFrontSensor() < 0.03) { // am i near to an
+																// obstacle?
+					break;
+				}
+			} catch (NoSensorDataAvailableException e) {
+				System.out.println("Currently no reasonable Data on " + e.sensorString);
+				e.printStackTrace();
 			}
 		}
 	}
@@ -147,14 +155,19 @@ public class RobotPath { // This class implements the general behaviour
 	public double driveAndCountTacho() {
 		double drivenDistance = 0.0d;
 		while(true) {
-			myServer.send(101);
+			Net.sendRobotCmd(NetSettings.getEv2Ip(), NetSettings.getRobotPort(), 101);
 			this.waitingForACK = true;
 			while(this.waitingForACK == true) {
 				; // waiting for ACK
 			}
 			drivenDistance += 0.01;
-			if(this.currentSensorData().get(2) < 0.03) {
-				break;
+			try {
+				if(util.SensorDataAccess.getFrontSensor() < 0.03) {
+					break;
+				}
+			} catch (NoSensorDataAvailableException e) {
+				System.out.println("Currently no reasonable data on " + e.sensorString);
+				e.printStackTrace();
 			}
 		}
 		return drivenDistance;
@@ -164,7 +177,8 @@ public class RobotPath { // This class implements the general behaviour
 	}
 
 	// Methods for access to sensor data - dummy implementation
-
+	
+/*
 	public ArrayList<String[]> getHistory() {
 		return CSVFile.readComplete();
 
@@ -195,16 +209,10 @@ public class RobotPath { // This class implements the general behaviour
 		return convertedData;
 
 	}
+	
+	*/
 
 	// Getters and setters
-
-	public ArrayList<RobotCommand> getCommandBuffer() {
-		return commandBuffer;
-	}
-
-	public void setCommandBuffer(ArrayList<RobotCommand> commandBuffer) {
-		this.commandBuffer = commandBuffer;
-	}
 
 	public boolean getHasMapSize() {
 		return hasMapSize;
