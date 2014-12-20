@@ -7,7 +7,7 @@
 	<classpathentry kind="lib" path="lib/lwjgl-2.9.1/jar/lwjgl_util.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl-2.9.1/jar/lwjgl.jar" sourcepath="lib/lwjgl-2.9.1/jar/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="galileo/lib/lwjgl-2.9.1/native/linux"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="galileo/lib/lwjgl-2.9.1/native/linuxtest"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/commons-lang3-3.3.2/commons-lang3-3.3.2.jar"/>
