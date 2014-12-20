@@ -10,12 +10,6 @@ import java.util.logging.Logger;
 import main.ComputerMain;
 import mapping.Map;
 import mapping.MapObject;
-//import main.Main_Computer;
-
-
-
-
-
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
@@ -30,28 +24,26 @@ public class MappingEV3 extends Thread {
 
 	private final static int SIZE = 20;
 	private static boolean drawingIt = true;
-
-	// static Map a = Main_Computer.getMap();// ;new mapping.MapTestingClass();
-
-	//public static mapping.MapTestingClass a = new mapping.MapTestingClass();
+	
+	//public static Map map = new mapping.MapTestingClass().map3;
 	public static Map map = ComputerMain.getMap();
 
 	 public void run() {
-	 initDisplay();
-	 initGL();
-	 gameLoop();
-	 cleanUp();
+		 initDisplay();
+		 initGL();
+		 gameLoop();
+		 cleanUp();
 	 }
 
 	// old main -> now as thread
 
-//	public static void main(String[] args) {
-//		// System.out.println(a.map.toString());
-//		initDisplay();
-//		initGL();
-//		gameLoop();
-//		cleanUp();
-//	}
+	public static void main(String[] args) {
+		// System.out.println(a.map.toString());
+		initDisplay();
+		initGL();
+		gameLoop();
+		cleanUp();
+	}
 	
 	
 	public static Texture loadTexture(String key) {
