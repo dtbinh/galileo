@@ -181,5 +181,14 @@ public class Map extends ArrayList<ArrayList<MapObject>> {
 		}
 
 	}
+	
+	public String toString() {
+		String map = "";
+		for (ArrayList<MapObject> arry : this ) {
+			map += arry.toString();
+			map += "\n";
+		}
+		return map;
+	}
 
 }

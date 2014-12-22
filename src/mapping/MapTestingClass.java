@@ -6,7 +6,8 @@ public class MapTestingClass {
 	public static Map map3 = new Map();
 	public static Map map = new Map();
 	public static Map map2 = new Map();
-
+	
+	
 	public MapTestingClass() {
 
 		TestVector vector1 = new TestVector(5,0);
