@@ -11,23 +11,29 @@ public class TestingReceive {
 	
 	public static void main(String[] args) throws IOException {
 		System.out.println("Listening on port: " + NetSettings.getPcPort());
+		//Net.waitForACK(500);
 		
-		if ( TestSettings.networkTestInfoPacket ) {
-			while( true ) {
-				System.out.println(Net.receiveInfo());
-			}			
-		} else {
-			while ( true ) {
-				DatagramPacket receivePacket = Net.receive(NetSettings.getPcPort());
-				System.out.println("From: " + receivePacket.getAddress());
-				System.out.println("  getContent(): " + PacketHandler.getContent(receivePacket.getData()));
-				System.out.println("  getRoboCmd(): " + PacketHandler.getRobotCommand(receivePacket.getData()));
-				System.out.print("  getSenspac(): ");
-				for(int i=0 ; i<3; ++i) {
-					System.out.print(PacketHandler.getSensordata(receivePacket.getData())[0] + " ");
-				}
-				System.out.println();
-			}
+		while (true) {
+			DatagramPacket receivePacket = Net.receive(NetSettings.getPcPort());
+			System.out.println("content: " + PacketHandler.getContent(receivePacket.getData()));
 		}
+
+//		if ( TestSettings.networkTestInfoPacket ) {
+//			while( true ) {
+//				System.out.println(Net.receiveInfo());
+//			}			
+//		} else {{
+//			//while ( true ) {
+//				DatagramPacket receivePacket = Net.receive(NetSettings.getPcPort());
+//				System.out.println("From: " + receivePacket.getAddress());
+//				System.out.println("  getContent(): " + PacketHandler.getContent(receivePacket.getData()));
+//				System.out.println("  getRoboCmd(): " + PacketHandler.getRobotCommand(receivePacket.getData()));
+//				System.out.print("  getSenspac(): ");
+//				for(int i=0 ; i<3; ++i) {
+//					System.out.print(PacketHandler.getSensordata(receivePacket.getData())[0] + " ");
+//				}
+//				System.out.println();
+//			}
+//		}
 	}
 }

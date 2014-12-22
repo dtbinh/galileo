@@ -5,11 +5,24 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
 import util.PacketHandler;
 
 public class Net {
+	private static int ackNr = 0;
+//	private static DatagramSocket receiveSocket = null;
+//	private static DatagramSocket clientSocket = null;
+//	
+//	static {
+//		try {
+//			serverSocket = new DatagramSocket(Port);
+//		} catch (SocketException e) {
+//			System.err.println("Couldn't initialize DatagramSocket. "
+//					+ e.getMessage());
+//		}
+//	}
 	
 	private Net(){
 		// private constructor, so you cannot create an instance of it
@@ -58,18 +71,19 @@ public class Net {
 					+ " command: " + sendData + " " + e.getMessage());
 		}
 	}
-
-	public static DatagramPacket receive(int PORT) {
+	
+	public static DatagramPacket receive(int PORT, int timeout) {
 		byte[] receiveData = new byte[NetSettings.getPacketSize()];
 		DatagramPacket receivePacket = new DatagramPacket(receiveData,
 				receiveData.length);
 
 		try {
-			DatagramSocket serverSocket = new DatagramSocket(PORT);
+			DatagramSocket receiveSocket = new DatagramSocket(PORT);
+			receiveSocket.setSoTimeout(timeout);
 			
-			serverSocket.receive(receivePacket);
+			receiveSocket.receive(receivePacket);
 			
-			serverSocket.close();
+			receiveSocket.close();
 		} catch (SocketException e) {
 			System.err.println("Couldn't initialize DatagramSocket. "
 					+ e.getMessage());
@@ -79,6 +93,13 @@ public class Net {
 		}
 		
 		return receivePacket;
+	}
+
+	public static DatagramPacket receive(int PORT) {
+		DatagramPacket pack = null;
+		pack = receive(PORT, 0);	// 0 = infinite timeout
+		 
+		return pack;
 	}
 	
 	//------------- C O N V E N I E N C E   M E T H O D S --------------------
@@ -126,14 +147,10 @@ public class Net {
 	
 	/**
 	 * <b>Sry, currently unimplemented</b>
-	 * Convenience way of sending an ACKnowledgement packet
+	 * Convenience way of sending an ACKnowledgement packet from robot to pc
 	 */
-	public static void sendACK( ) {//String IP, int PORT, int ackNr) {
-		//System.out.println("sendACK currently unimplemented");
-		byte[] data = new byte[NetSettings.getPacketSize()];
-		// set type of packet
-		data[0] = 2;
-		// TODO: fill packet 
+	public static void sendACK( ) {
+		byte[] data = PacketHandler.makeACKPacket(ackNr);
 		send(NetSettings.getPcIp(), NetSettings.getPcPort(), data);
 	}
 	
@@ -151,11 +168,15 @@ public class Net {
 	}
 	
 	/**
-	 * 
-	 * @param timeout	
+	 * Convenience way of receiving an ACKnowledgement packet from robot to pc
+	 * @param timeout	time you're willing to wait for an ack.
+	 * 					You have to estimate how long it takes to execute the
+	 * 					command you've send before
 	 */
 	public static void waitForACK(int timeout) {
+		receive(NetSettings.getPcPort(), timeout);
 		
+		ackNr++;
 	}
 	
 	//------------- I N F O   P A C K E T   M E T H O D S --------------------
