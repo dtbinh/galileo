@@ -7,6 +7,11 @@ public class MapTestingClass {
 	public static Map map = new Map();
 	public static Map map2 = new Map();
 	
+	public static void main(String[] args) {
+		MapTestingClass t = new MapTestingClass();
+		System.out.println(t.map3.toString());
+	}
+	
 	
 	public MapTestingClass() {
 
@@ -16,10 +21,10 @@ public class MapTestingClass {
 		TestVector vector2 = new TestVector(0,5);
 		vector2.x = 0;
 		vector2.y = 5;
-		TestVector vector3 = new TestVector(5,0);
+		TestVector vector3 = new TestVector(-5,0);
 		vector3.x = -5;
 		vector3.y = 0;
-		TestVector vector4 = new TestVector(5,0);
+		TestVector vector4 = new TestVector(0, -5);
 		vector4.x = 0;
 		vector4.y = -5;
 		map3.updateMapFromVectors(vector1);
