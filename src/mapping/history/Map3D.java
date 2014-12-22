@@ -1,4 +1,4 @@
-package mapping.history.threeD;
+package mapping.history;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +22,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Map3D extends Thread {
 
-	private final static int SIZE = 20;
 	private static boolean drawingIt = true;
 	private static float movementOfCameraSpeed = 0.1f;
 	
@@ -137,23 +136,20 @@ public class Map3D extends Thread {
 					// if WALL
 					if (map.get(y).get(x) == MapObject.WALL) {
 						glColor3f(1f, 0f, 0f);
-						drawRectWall(var1 * a, var2 * a, 100,
-								100, drawingIt);
+						drawRectWall(var1 * a, var2 * a, drawingIt);
 					}
 
 					// if OBSTACLE
 					else if (map.get(y).get(x) == MapObject.OBSTACLE) {
 						glColor3f(0f, 1f, 0f);
 
-						drawRectObstacle(var1 * a, var2 * a, SIZE,
-								SIZE, drawingIt);
+						drawRectObstacle(var1 * a, var2 * a, drawingIt);
 					}
 
 					// if EMPTY
 					else if (map.get(y).get(x) == MapObject.EMPTY) {
 						glColor3f(0f, 0f, 1f);
-						drawRectEmpty(var1 * a, var2 * a, SIZE,
-								SIZE, drawingIt);
+						drawRectEmpty(var1 * a, var2 * a, drawingIt);
 					}
 					var1++;
 				}
@@ -172,7 +168,7 @@ public class Map3D extends Thread {
 	}
 
 
-//	private static void drawRect(float x, float y, float width, float height, boolean banana) {
+//	private static void drawRect(float x, float y, boolean banana) {
 //		if (banana) {
 //			glPushMatrix();
 //			{
@@ -216,8 +212,8 @@ public class Map3D extends Thread {
 //					glTexCoord2f(1,1); glVertex3f(1, 1, 1);
 //					glTexCoord2f(1,0); glVertex3f(-1, 1, 1);
 					
-					private static void drawRectWall(float x, float y, float width, float height, boolean banana) {
-						if (banana) {
+					private static void drawRectWall(float x, float y, boolean shouldItBeDrawn) {
+						if (shouldItBeDrawn) {
 							glPushMatrix();
 							{
 								glTranslatef(x, y, 0);
@@ -273,8 +269,8 @@ public class Map3D extends Thread {
 						}
 					}
 					
-					private static void drawRectEmpty(float x, float y, float width, float height, boolean banana) {
-						if (banana) {
+					private static void drawRectEmpty(float x, float y, boolean shouldItBeDrawn) {
+						if (shouldItBeDrawn) {
 							glPushMatrix();
 							{
 								glTranslatef(x, y, 0);
@@ -329,8 +325,8 @@ public class Map3D extends Thread {
 						}
 					}
 			        
-					private static void drawRectObstacle(float x, float y, float width, float height, boolean banana) {
-						if (banana) {
+					private static void drawRectObstacle(float x, float y, boolean shouldItBeDrawn) {
+						if (shouldItBeDrawn) {
 							glPushMatrix();
 							{
 								glTranslatef(x, y, 0);

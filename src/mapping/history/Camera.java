@@ -1,4 +1,4 @@
-package mapping.history.threeD;
+package mapping.history;
 
 import static org.lwjgl.opengl.GL11.*;
 

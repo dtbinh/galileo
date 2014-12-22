@@ -1,4 +1,4 @@
-package mapping.history.twoD;
+package mapping.history;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
