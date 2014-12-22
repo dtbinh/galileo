@@ -25,15 +25,15 @@ public class MappingEV3 extends Thread {
 	private final static int SIZE = 20;
 	private static boolean drawingIt = true;
 	
-	//public static Map map = new mapping.MapTestingClass().map3;
-	public static Map map = ComputerMain.getMap();
+	public static Map map = new mapping.MapTestingClass().map3;
+//	public static Map map = ComputerMain.getMap();
 
-	 public void run() {
-		 initDisplay();
-		 initGL();
-		 gameLoop();
-		 cleanUp();
-	 }
+//	 public void run() {
+//		 initDisplay();
+//		 initGL();
+//		 gameLoop();
+//		 cleanUp();
+//	 }
 
 	// old main -> now as thread
 

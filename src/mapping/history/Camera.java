@@ -3,6 +3,8 @@ package mapping.history;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.*;
 
+import org.lwjgl.opengl.Display;
+
 public class Camera {
 
 	// positioning
@@ -21,9 +23,9 @@ public class Camera {
 	private float far;
 
 	public Camera(float fov, float aspect, float near, float far) {
-		x = 0;
-		y = 0;
-		z = 0;
+		x = -30;
+		y = -30;
+		z = -20;
 		rx = 0;
 		ry = 0;
 		rz = 0;

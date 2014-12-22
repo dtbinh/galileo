@@ -1,6 +1,7 @@
 package main;
 
 import pathfinding.RobotPath;
+
 import util.ConfigFiles;
 import util.SensorReceiveThread;
 import mapping.Map;
