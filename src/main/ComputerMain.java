@@ -16,9 +16,9 @@ public class ComputerMain {
 		new SensorReceiveThread().start();
 		
 		if (RunSettings._2D) {
-			new mapping.history.twoD.MappingEV3().start();
+			new mapping.history.twoD.Map2D().start();
 		} else {
-			new mapping.history.MappingEV3().start();
+			new mapping.history.threeD.Map3D().start();
 		}
 		
 		RobotPath r = new RobotPath();

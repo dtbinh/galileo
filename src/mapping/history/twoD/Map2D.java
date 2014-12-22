@@ -15,7 +15,7 @@ import org.lwjgl.opengl.DisplayMode;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class MappingEV3 extends Thread {
+public class Map2D extends Thread {
 	private static final int WINDOW_WIDTH = 800;
 	private static final int WINDOW_HEIGHT = 600;
 	private final static int SIZE = 20;
@@ -125,7 +125,7 @@ public class MappingEV3 extends Thread {
 			Display.setDisplayMode(new DisplayMode(WINDOW_WIDTH, WINDOW_HEIGHT));
 			Display.create();
 		} catch (LWJGLException ex) {
-			Logger.getLogger(MappingEV3.class.getName()).log(Level.SEVERE,
+			Logger.getLogger(Map2D.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
 	}
