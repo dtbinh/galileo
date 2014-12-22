@@ -1,0 +1,36 @@
+PC|						 network					|ROBOT
+--+							|						+-----
+							|
+-- -- -- -- -- -- -- -- -- -|- -- -- -- -- -- -- -- -- ---
+							|
+sendRobotCommand(110)	----|---->	receiveRobotCommand()
+							|				v
+							|		driveForward(10)
+							|				v
+waitForACK()			<---|----	sendACK()
+							|
+-- -- -- -- -- -- -- -- -- -|- -- -- -- -- -- -- -- -- ---
+
+
+Now, what can happen?:
+[1]	robotCommand doesn't arrive at the robot.
+	pc is waiting for an ack which will never be send / come in,
+	but the robot hasn't executed the command you've send, too
+	
+	SOLUTION: set a timeout when waiting for an ack
+			when you call waitForACK() you have to estimate, how long it takes
+			to finish the robotCommand you've send before
+			if nothing comes in send the robot command again.
+			
+[2] acknowledgment doesn't arrive at the pc.
+	pc is waiting for an ack, robotCommand has been executed
+	
+	PROBLEM: you don't know at the pc side if the robot has received the cmd
+			 to do something, or just the ACK is lost..
+	
+	SOLUTION: resend robotCommand after a timeout
+			robot has to check if he has executed the command or not
+			
+			=> serial numbers (or acknowledgment numbers, command numbers, .. )
+
+
