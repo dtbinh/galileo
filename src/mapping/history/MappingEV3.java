@@ -24,6 +24,7 @@ public class MappingEV3 extends Thread {
 
 	private final static int SIZE = 20;
 	private static boolean drawingIt = true;
+	private static float movementOfCameraSpeed = 0.1f;
 	
 	public static Map map = new mapping.MapTestingClass().map3;
 //	public static Map map = ComputerMain.getMap();
@@ -74,33 +75,33 @@ public class MappingEV3 extends Thread {
 		while (!Display.isCloseRequested()) {
 			
 			if (Keyboard.isKeyDown(Keyboard.KEY_W))
-				cam.move(0.1f, 1);
+				cam.move(movementOfCameraSpeed, 1);
 			if (Keyboard.isKeyDown(Keyboard.KEY_S))
-				cam.move(-0.1f, 1);
+				cam.move(-movementOfCameraSpeed, 1);
 			if (Keyboard.isKeyDown(Keyboard.KEY_A))
-				cam.move(0.1f, 0);// cam.rotateY(-0.1f);
+				cam.move(movementOfCameraSpeed, 0);// cam.rotateY(-0.1f);
 			if (Keyboard.isKeyDown(Keyboard.KEY_D))
-				cam.move(-0.1f, 0);// cam.rotateY(0.1f);
+				cam.move(-movementOfCameraSpeed, 0);// cam.rotateY(0.1f);
 			if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-				cam.rotateY(-0.1f);// cam.rotateY(-0.1f);
+				cam.rotateY(-movementOfCameraSpeed);// cam.rotateY(-0.1f);
 			}
 			if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-				cam.rotateY(0.1f);// cam.rotateY(0.1f);
+				cam.rotateY(movementOfCameraSpeed);// cam.rotateY(0.1f);
 			}
 			if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-				 cam.rotateX(0.1f);
+				 cam.rotateX(movementOfCameraSpeed);
 			}
 			
 			if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-				 cam.rotateX(-0.1f);
+				 cam.rotateX(-movementOfCameraSpeed);
 			}
 			
 			if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-				cam.upDown(-0.1f);
+				cam.upDown(-movementOfCameraSpeed);
 			}
 			
 			if (Keyboard.isKeyDown(Keyboard.KEY_C)) {
-				cam.upDown(0.1f);
+				cam.upDown(movementOfCameraSpeed);
 			}
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
