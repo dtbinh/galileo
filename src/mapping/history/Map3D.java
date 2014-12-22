@@ -22,6 +22,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Map3D extends Thread {
 
+	private static int SIZE = 20;
 	private static boolean drawingIt = true;
 	private static float movementOfCameraSpeed = 0.1f;
 	
@@ -63,7 +64,7 @@ public class Map3D extends Thread {
 
 		Texture wood = loadTexture("wood");
 		
-		CameraFor3D cam = new CameraFor3D(70, (float) Display.getWidth()
+		Camera cam = new Camera(70, (float) Display.getWidth()
 				/ (float) Display.getHeight(), 0.3f, 1000);
 
 		// float rotation = 0;
@@ -107,26 +108,23 @@ public class Map3D extends Thread {
 				var2++;
 				for (int x = 0; x < map.get(y).size(); x++) {
 
-//					// if WALL
+					// if WALL
 //					if (map.get(y).get(x) == MapObject.WALL) {
 //						glColor3f(1f, 0f, 0f);
-//						drawRectWall(var1 * (SIZE + 5), var2 * (SIZE + 5), 100,
-//								100, drawingIt);
+//						drawRectWall(var1 * (SIZE + 5), var2 * (SIZE + 5), drawingIt);
 //					}
 //
 //					// if OBSTACLE
 //					else if (map.get(y).get(x) == MapObject.OBSTACLE) {
 //						glColor3f(0f, 1f, 0f);
 //
-//						drawRectObstacle(var1 * (SIZE + 5), var2 * (SIZE + 5) , SIZE,
-//								SIZE, drawingIt);
+//						drawRectObstacle(var1 * (SIZE + 5), var2 * (SIZE + 5) , drawingIt);
 //					}
 //
 //					// if EMPTY
 //					else if (map.get(y).get(x) == MapObject.EMPTY) {
 //						glColor3f(0f, 0f, 1f);
-//						drawRectEmpty(var1 * (SIZE + 5), var2 * (SIZE+5), SIZE,
-//								SIZE, drawingIt);
+//						drawRectEmpty(var1 * (SIZE + 5), var2 * (SIZE+5), drawingIt);
 //					}
 //					var1++;
 //				}
@@ -276,48 +274,48 @@ public class Map3D extends Thread {
 								glTranslatef(x, y, 0);
 								glBegin(GL_QUADS);
 								{
-			        //Empty
-//			        glColor3f(0.0f,1.0f,0.0f);          // Set The Color To Green
+
+//					glColor3f(0.0f,1.0f,0.0f);          // Set The Color To Green
 					
-					glVertex3f( 1.0f, 1.0f,0.5f);          // Top Right Of The Quad (Top)
-					glVertex3f(-1.0f, 1.0f,0.5f);          // Top Left Of The Quad (Top)
-					glVertex3f(-1.0f, 1.0f, 1.0f);          // Bottom Left Of The Quad (Top)
-					glVertex3f( 1.0f, 1.0f, 1.0f);          // Bottom Right Of The Quad (Top)
+					glVertex3f( 1.0f, 1.0f,-1f);          // Top Right Of The Quad (Top)
+					glVertex3f(-1.0f, 1.0f,-1f);          // Top Left Of The Quad (Top)
+					glVertex3f(-1.0f, 1.0f, -0.5f);          // Bottom Left Of The Quad (Top)
+					glVertex3f( 1.0f, 1.0f, -0.5f);          // Bottom Right Of The Quad (Top)
 					
 //					glColor3f(1.0f,0.5f,0.0f);          // Set The Color To Orange
 					
-					glVertex3f( 1.0f,-1.0f, 1.0f);          // Top Right Of The Quad (Bottom)
-					glVertex3f(-1.0f,-1.0f, 1.0f);          // Top Left Of The Quad (Bottom)
-					glVertex3f(-1.0f,-1.0f,0.5f);          // Bottom Left Of The Quad (Bottom)
-					glVertex3f( 1.0f,-1.0f,0.5f);          // Bottom Right Of The Quad (Bottom)
+					glVertex3f( 1.0f,-1.0f, -0.5f);          // Top Right Of The Quad (Bottom)
+					glVertex3f(-1.0f,-1.0f, -0.5f);          // Top Left Of The Quad (Bottom)
+					glVertex3f(-1.0f,-1.0f,-1f);          // Bottom Left Of The Quad (Bottom)
+					glVertex3f( 1.0f,-1.0f,-1f);          // Bottom Right Of The Quad (Bottom)
 					
 //					glColor3f(1.0f,0.0f,0.0f);          // Set The Color To Red
 					
-					glVertex3f( 1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Front)
-					glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Left Of The Quad (Front)
-					glVertex3f(-1.0f,-1.0f, 1.0f);          // Bottom Left Of The Quad (Front)
-					glVertex3f( 1.0f,-1.0f, 1.0f);          // Bottom Right Of The Quad (Front)
+					glVertex3f( 1.0f, 1.0f, -0.5f);          // Top Right Of The Quad (Front)
+					glVertex3f(-1.0f, 1.0f, -0.5f);          // Top Left Of The Quad (Front)
+					glVertex3f(-1.0f,-1.0f, -0.5f);          // Bottom Left Of The Quad (Front)
+					glVertex3f( 1.0f,-1.0f, -0.5f);          // Bottom Right Of The Quad (Front)
 					
 //					glColor3f(1.0f,1.0f,0.0f);          // Set The Color To Yellow
 					
-					glVertex3f( 1.0f,-1.0f, 0.5f);          // Bottom Left Of The Quad (Back)
-					glVertex3f(-1.0f,-1.0f, 0.5f);          // Bottom Right Of The Quad (Back)
-					glVertex3f(-1.0f, 1.0f, 0.5f);          // Top Right Of The Quad (Back)
-					glVertex3f( 1.0f, 1.0f, 0.5f);          // Top Left Of The Quad (Back)
+					glVertex3f( 1.0f,-1.0f,-1.0f);          // Bottom Left Of The Quad (Back)
+					glVertex3f(-1.0f,-1.0f,-1.0f);          // Bottom Right Of The Quad (Back)
+					glVertex3f(-1.0f, 1.0f,-1.0f);          // Top Right Of The Quad (Back)
+					glVertex3f( 1.0f, 1.0f,-1.0f);          // Top Left Of The Quad (Back)
 
 //					glColor3f(0.0f,0.0f,1.0f);          // Set The Color To Blue
 					
-					glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Left)
-					glVertex3f(-1.0f, 1.0f,0.5f);          // Top Left Of The Quad (Left)
-					glVertex3f(-1.0f,-1.0f,0.5f);          // Bottom Left Of The Quad (Left)
-					glVertex3f(-1.0f,-1.0f, 1.0f);          // Bottom Right Of The Quad (Left)
+					glVertex3f(-1.0f, 1.0f,-0.5f);          // Top Right Of The Quad (Left)
+					glVertex3f(-1.0f, 1.0f,-1.0f);          // Top Left Of The Quad (Left)
+					glVertex3f(-1.0f,-1.0f,-1.0f);          // Bottom Left Of The Quad (Left)
+					glVertex3f(-1.0f,-1.0f,-0.5f);          // Bottom Right Of The Quad (Left)
 					
 //			        glColor3f(1.0f,0.0f,1.0f);          // Set The Color To Violet
 			        
-			        glVertex3f( 1.0f, 1.0f, 0.5f);          // Top Right Of The Quad (Right)
-			        glVertex3f( 1.0f, 1.0f, 1.0f);          // Top Left Of The Quad (Right)
-			        glVertex3f( 1.0f,-1.0f, 1.0f);          // Bottom Left Of The Quad (Right)
-			        glVertex3f( 1.0f,-1.0f, 0.5f);          // Bottom Right Of The Quad (Right)
+			        glVertex3f( 1.0f, 1.0f,-1.0f);          // Top Right Of The Quad (Right)
+			        glVertex3f( 1.0f, 1.0f, -0.5f);          // Top Left Of The Quad (Right)
+			        glVertex3f( 1.0f,-1.0f, -0.5f);          // Bottom Left Of The Quad (Right)
+			        glVertex3f( 1.0f,-1.0f,-1.0f);          // Bottom Right Of The Quad (Right)
 								}
 								glEnd();
 							}

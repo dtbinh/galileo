@@ -5,7 +5,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.*;
 
 
-public class CameraFor3D {
+public class Camera {
 
 	// positioning
 	// - where our camera is
@@ -22,7 +22,7 @@ public class CameraFor3D {
 	private float near;
 	private float far;
 
-	public CameraFor3D(float fov, float aspect, float near, float far) {
+	public Camera(float fov, float aspect, float near, float far) {
 		x = 0;
 		y = 0;
 		z = -10;
@@ -45,7 +45,7 @@ public class CameraFor3D {
 
 		glEnable(GL_DEPTH_TEST);
 		//for texture
-		glEnable(GL_TEXTURE_2D);
+//		glEnable(GL_TEXTURE_2D);
 	}
 
 	public void useView() {
