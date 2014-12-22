@@ -1,4 +1,4 @@
-package mapping.history.threeD;
+package mapping.history;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -45,7 +45,7 @@ public class Camera {
 
 		glEnable(GL_DEPTH_TEST);
 		//for texture
-		glEnable(GL_TEXTURE_2D);
+//		glEnable(GL_TEXTURE_2D);
 	}
 
 	public void useView() {
