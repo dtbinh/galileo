@@ -25,7 +25,7 @@ public class Camera {
 	public Camera(float fov, float aspect, float near, float far) {
 		x = 0;
 		y = 0;
-		z = -10;
+		z = -20;
 		rx = 0;
 		ry = 0;
 		rz = 0;
