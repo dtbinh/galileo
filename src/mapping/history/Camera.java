@@ -1,9 +1,9 @@
 package mapping.history;
 
 import static org.lwjgl.opengl.GL11.*;
+
 import static org.lwjgl.util.glu.GLU.*;
 
-import org.lwjgl.opengl.Display;
 
 public class Camera {
 
@@ -23,9 +23,9 @@ public class Camera {
 	private float far;
 
 	public Camera(float fov, float aspect, float near, float far) {
-		x = -30;
-		y = -30;
-		z = -20;
+		x = 0;
+		y = 0;
+		z = -10;
 		rx = 0;
 		ry = 0;
 		rz = 0;
@@ -45,7 +45,7 @@ public class Camera {
 
 		glEnable(GL_DEPTH_TEST);
 		//for texture
-//		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_TEXTURE_2D);
 	}
 
 	public void useView() {
@@ -110,7 +110,6 @@ public class Camera {
 	}
 
 	public void rotateY(float amt) {
-//		this.z += amt;
 		ry += amt;
 	}
 	
