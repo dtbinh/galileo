@@ -7,40 +7,13 @@ import network.NetSettings;
 
 public class PacketHandler {
 	
-	public static void main(String[] args){
-		// teststuff... will be deleted when everything is implemented!
-		byte[] sensorPacket = new byte[NetSettings.getPacketSize()];
-		sensorPacket[0] = 0;
-		for(int i=0; i<4; ++i)
-			sensorPacket[i+1] = (byte)((Float.floatToIntBits((float)0.35700002) >> ((7 - i) * 8)) & 0xff);
-		for(int i=0; i<4; ++i)
-			sensorPacket[i+5] = (byte)((Float.floatToIntBits((float)0.35700002) >> ((7 - i) * 8)) & 0xff);
-		for(int i=0; i<4; ++i)
-			sensorPacket[i+9] = (byte)((Float.floatToIntBits((float)0.35700002) >> ((7 - i) * 8)) & 0xff);
-		
-		byte[] robotCmdPacket = new byte[NetSettings.getPacketSize()];
-		robotCmdPacket[0] = 1;
-		short s = 12207;//(short) 0b0010_1111_1010_1111;
-		System.out.println(s);
-		for(int i=0; i < 2; ++i)
-			robotCmdPacket[i+1] = (byte) ((s >> (1 - i) * 8) & 0xff);
-		
-		byte[] ackPacket = new byte[NetSettings.getPacketSize()];
-		
-		System.out.println("getsensordata");
-		System.out.println(getContent(sensorPacket));
-		System.out.println("getrobotcommand");
-		System.out.println(getContent(robotCmdPacket));
-		System.out.println("getack");
-		System.out.println(getACK(ackPacket));
-	}
-	
 	private PacketHandler() {
 		// private constructor, so you cannot create an instance of it
 	}
 	
 	/**
 	 * Returns the values as String
+	 * <br>useful for printing values
 	 * <br>At first it looks at the first byte to see what kind of data it contains
 	 * <br>0 -> sensordata
 	 * <br>1 -> robot command
@@ -60,7 +33,7 @@ public class PacketHandler {
 		else if (packetbytes[0] == 1)
 			str = getRobotCommand(packetbytes) +"";
 		else if (packetbytes[0] == 2)
-			str = getACK(packetbytes);
+			str = getAckNumber(packetbytes) +"";
 		
 		return str;
 	}
@@ -108,13 +81,15 @@ public class PacketHandler {
 	}
 	
 	/**
-	 * <br>Sry, currently unimplemented!</br>
+	 * Extract Acknowledgement number from a packet
 	 * @param	packetbytes	- data part of a DatagramPacket
-	 * @return
+	 * @return	int acknumber
 	 */
-	private static String getACK (byte[] packetbytes) {
-		String str = "";
-		return str;
+	public static int getAckNumber (byte[] packetbytes) {
+		byte[] bytes = new byte[4];
+		for(int i=1; i<=4; ++i)
+			bytes[i-1] = (byte)packetbytes[i];
+		return ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN).getInt();
 	}
 	
 	//------------------------------------------------------
@@ -140,5 +115,14 @@ public class PacketHandler {
 		for(int i=0; i<4; ++i)
 			sensordataArr[i+9] = (byte)((Float.floatToIntBits(uss_rb) >> ((7 - i) * 8)) & 0xff);
 		return sensordataArr;
+	}
+	
+	public static byte[] makeACKPacket(int ackNr) {
+		byte[] ackPacket = new byte[NetSettings.getPacketSize()];
+		ackPacket[0] = 2;			// set type of packet
+		// fill packet
+		for(int i=0; i<4; ++i)
+			ackPacket[i+1] = (byte) (ackNr >> ((7 - i) * 8) & 0xff);
+		return ackPacket;
 	}
 }
