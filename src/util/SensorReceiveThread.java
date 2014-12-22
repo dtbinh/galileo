@@ -2,11 +2,11 @@ package util;
 
 import java.net.DatagramPacket;
 
+import main.RunSettings;
 import network.Net;
 import network.NetSettings;
 
 public class SensorReceiveThread extends Thread {
-	private static boolean print = false;
 	
 	public void run() {
 		// get memory for saving packets
@@ -22,7 +22,7 @@ public class SensorReceiveThread extends Thread {
 			SensorDataAccess.setUss_rf(sensorValues[1]);
 			SensorDataAccess.setUss_rb(sensorValues[2]);
 			
-			if (true) {
+			if (RunSettings.debug) {
 				System.out.println();
 				System.out.print("uss_f:  " + sensorValues[0] + "\t");
 				System.out.print("uss_rf: " + sensorValues[1] + "\t");
@@ -30,9 +30,5 @@ public class SensorReceiveThread extends Thread {
 			}
 
 		}
-	}
-	
-	public static void setPrint(boolean bool) {
-		print = bool;
 	}
 }

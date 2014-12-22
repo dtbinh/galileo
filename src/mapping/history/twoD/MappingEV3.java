@@ -1,13 +1,13 @@
 package mapping.history.twoD;
 
 import java.util.logging.Level;
-
-
 import java.util.logging.Logger;
 
+import main.ComputerMain;
 import mapping.Map;
 import mapping.MapObject;
 //import main.Main_Computer;
+
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
@@ -16,25 +16,26 @@ import org.lwjgl.opengl.DisplayMode;
 import static org.lwjgl.opengl.GL11.*;
 
 public class MappingEV3 extends Thread {
-
+	private static final int WINDOW_WIDTH = 800;
+	private static final int WINDOW_HEIGHT = 600;
 	private final static int SIZE = 20;
 	private static boolean drawingIt = true;
 
-	// static Map a = Main_Computer.getMap();// ;new mapping.MapTestingClass();
+	//public static Map map = new mapping.MapTestingClass().map;
+	public static Map map = ComputerMain.getMap();
 
-	public static mapping.MapTestingClass a = new mapping.MapTestingClass();
-
-	// public void run() {
-	// initDisplay();
-	// initGL();
-	// gameLoop();
-	// cleanUp();
-	// }
+	 public void run() {
+		 System.out.println(map.toString());
+		 initDisplay();
+		 initGL();
+		 gameLoop();
+		 cleanUp();
+	 }
 
 	// old main -> now as thread
 
 	public static void main(String[] args) {
-		System.out.println(a.map.toString());
+		System.out.println(map.toString());
 		initDisplay();
 		initGL();
 		gameLoop();
@@ -51,15 +52,15 @@ public class MappingEV3 extends Thread {
 			int var1 = 0;
 			int var2 = -1;
 
-			for (int y = a.map.size() - 1; y >= 0; --y) {
+			for (int y = map.size() - 1; y >= 0; --y) {
 				var2++;
-				for (int x = 0; x < a.map.get(y).size(); x++) {
+				for (int x = 0; x < map.get(y).size(); x++) {
 
-					if (a.map.get(y).get(x) == MapObject.WALL) {
+					if (map.get(y).get(x) == MapObject.WALL) {
 						glColor3f(0.80f, 0.20f, 0.2f);
 						drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
 								SIZE, drawingIt);
-					} else if (a.map.get(y).get(x) == MapObject.OBSTACLE) {
+					} else if (map.get(y).get(x) == MapObject.OBSTACLE) {
 						glColor3f(0.80f, 0.20f, 0.98f);
 						drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
 								SIZE, drawingIt);
@@ -121,7 +122,7 @@ public class MappingEV3 extends Thread {
 	private static void initDisplay() {
 
 		try {
-			Display.setDisplayMode(new DisplayMode(800, 800));
+			Display.setDisplayMode(new DisplayMode(WINDOW_WIDTH, WINDOW_HEIGHT));
 			Display.create();
 		} catch (LWJGLException ex) {
 			Logger.getLogger(MappingEV3.class.getName()).log(Level.SEVERE,

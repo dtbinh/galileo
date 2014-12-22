@@ -8,11 +8,11 @@ import lejos.hardware.port.Port;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
+import main.RunSettings;
 import network.Net;
 import network.NetSettings;
 
 public class SensorSendingThread extends Thread {
-	private static boolean print = false;
 	
 	public void run() {
 		/* Steps to initialize the sensors */
@@ -42,28 +42,26 @@ public class SensorSendingThread extends Thread {
 		Key escape = brick.getKey("Escape");
 		
 		LCD.clear();
-		LCD.drawString("Sensors running!", 0, 0);
+		Net.sendInfo(NetSettings.getPcIp(), "Sensors running!");
 		// TODO: change to Thread.currentThread().isAlive()
-		while (!escape.isDown()) {			
-			sendData = PacketHandler.makeSensorPacket(ultra_sample_rf[0], ultra_sample_rb[0], ultra_sample_f[0]);
+		while (!escape.isDown()) {
+			sample_ev3_ultra_f.fetchSample(ultra_sample_f, 0);
+			sample_ev3_ultra_rf.fetchSample(ultra_sample_rf, 0);
+			sample_ev3_ultra_rb.fetchSample(ultra_sample_rb, 0);
+			
+			sendData = PacketHandler.makeSensorPacket(ultra_sample_f[0], ultra_sample_rf[0], ultra_sample_rb[0]);
 			
 			// send packet to pc
 			Net.send(NetSettings.getPcIp(), NetSettings.getPcPort(), sendData);
 			
-			if (print) {
-				// Display ultra f
+			if (RunSettings.debug) {
 				LCD.clear(1);
-				sample_ev3_ultra_f.fetchSample(ultra_sample_f, 0);
 				LCD.drawString("uss_f:  " + ultra_sample_f[0], 0, 1);
 				
-				// Display ultra rf
 				LCD.clear(2);
-				sample_ev3_ultra_rf.fetchSample(ultra_sample_rf, 0);
 				LCD.drawString("uss_rf: " + ultra_sample_rf[0], 0, 2);
 				
-				// Display ultra rb
 				LCD.clear(3);
-				sample_ev3_ultra_rb.fetchSample(ultra_sample_rb, 0);
 				LCD.drawString("uss_rb: " + ultra_sample_rb[0], 0, 3);
 			}
 			Delay.msDelay(333);		// 3 packets per minute
@@ -76,10 +74,6 @@ public class SensorSendingThread extends Thread {
 		
 		// clear screen
 		LCD.clear();
-	}
-	
-	public static void setPrint(boolean bool) {
-		print = bool;
 	}
 
 }

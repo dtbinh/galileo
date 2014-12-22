@@ -84,20 +84,6 @@ public class Net {
 	//------------- C O N V E N I E N C E   M E T H O D S --------------------
 	
 	/**
-	 * Convenience way of receiving a robot command
-	 * @param PORT	on which receiver listens,	use NetSettings.get...Port() if you can
-	 * @return	short robotCommand
-	 */
-	public static short receiveRobotCmd(int PORT) {
-		DatagramPacket received = receive(PORT);
-		byte[] receivedData = received.getData();
-		String s = PacketHandler.getContent(receivedData);
-		return Short.parseShort(s);
-	}
-	
-
-	
-	/**
 	 * Convenience way of sending sensor data
 	 * @param IP		receiver's IP address,		use NetSettings.get...Ip() if you can
 	 * @param PORT		on which receiver listens,	use NetSettings.get...Port() if you can
@@ -149,6 +135,27 @@ public class Net {
 		data[0] = 2;
 		// TODO: fill packet 
 		send(NetSettings.getPcIp(), NetSettings.getPcPort(), data);
+	}
+	
+	
+	/**
+	 * Convenience way of receiving a robot command
+	 * @param PORT	on which receiver listens,	use NetSettings.get...Port() if you can
+	 * @return	short robotCommand
+	 */
+	public static short receiveRobotCmd(int PORT) {
+		DatagramPacket received = receive(PORT);
+		byte[] receivedData = received.getData();
+		String s = PacketHandler.getContent(receivedData);
+		return Short.parseShort(s);
+	}
+	
+	/**
+	 * 
+	 * @param timeout	
+	 */
+	public static void waitForACK(int timeout) {
+		
 	}
 	
 	//------------- I N F O   P A C K E T   M E T H O D S --------------------

@@ -1,25 +1,25 @@
 package main;
 
 import pathfinding.RobotPath;
-
 import util.ConfigFiles;
 import util.SensorReceiveThread;
 import mapping.Map;
-import mapping.history.MappingEV3;
 
 public class ComputerMain {
 	private static Map map = new Map();
-	private static boolean fromHistory = true;
 	
 	public static void main(String[] args) {
 		ConfigFiles.read();
 		//printRobotSettings();
 		
-		SensorReceiveThread.setPrint(true);		// prints sensor values to console
+		//Net.receiveInfo();
 		new SensorReceiveThread().start();
 		
-		if (fromHistory)
-			new MappingEV3().start();
+		if (RunSettings._2D) {
+			new mapping.history.twoD.MappingEV3().start();
+		} else {
+			new mapping.history.MappingEV3().start();
+		}
 		
 		RobotPath r = new RobotPath();
 		r.run(map);
