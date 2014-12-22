@@ -63,7 +63,7 @@ public class Map3D extends Thread {
 
 		Texture wood = loadTexture("wood");
 		
-		Camera cam = new Camera(70, (float) Display.getWidth()
+		CameraFor3D cam = new CameraFor3D(70, (float) Display.getWidth()
 				/ (float) Display.getHeight(), 0.3f, 1000);
 
 		// float rotation = 0;
