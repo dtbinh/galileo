@@ -7,7 +7,7 @@ sendRobotCommand(110)	----|---->	receiveRobotCommand()
 							|				v
 							|		driveForward(10)
 							|				v
-waitForACK()			<---|----	sendACK()
+waitForACK(timeout)		<---|----	sendACK()
 							|
 -- -- -- -- -- -- -- -- -- -|- -- -- -- -- -- -- -- -- ---
 
