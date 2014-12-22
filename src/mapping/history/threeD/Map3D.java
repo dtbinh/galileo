@@ -26,7 +26,7 @@ public class Map3D extends Thread {
 	private static boolean drawingIt = true;
 	private static float movementOfCameraSpeed = 0.1f;
 	
-	public static Map map = new mapping.MapTestingClass().map;
+	public static Map map = new mapping.MapTestingClass().map3;
 //	public static Map map = ComputerMain.getMap();
 
 	 public void run() {
@@ -81,13 +81,13 @@ public class Map3D extends Thread {
 			if (Keyboard.isKeyDown(Keyboard.KEY_D))
 				cam.move(-movementOfCameraSpeed, 0);
 			if (Keyboard.isKeyDown(Keyboard.KEY_LEFT))
-				cam.rotateY(-movementOfCameraSpeed);
+				cam.rotateY(-movementOfCameraSpeed*2);
 			if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT))
-				cam.rotateY(movementOfCameraSpeed);
+				cam.rotateY(movementOfCameraSpeed*2);
 			if (Keyboard.isKeyDown(Keyboard.KEY_DOWN))
-				 cam.rotateX(movementOfCameraSpeed);
+				 cam.rotateX(movementOfCameraSpeed*2);
 			if (Keyboard.isKeyDown(Keyboard.KEY_UP))
-				 cam.rotateX(-movementOfCameraSpeed);
+				 cam.rotateX(-movementOfCameraSpeed*2);
 			if (Keyboard.isKeyDown(Keyboard.KEY_SPACE))
 				cam.upDown(-movementOfCameraSpeed);
 			if (Keyboard.isKeyDown(Keyboard.KEY_C))
@@ -108,10 +108,36 @@ public class Map3D extends Thread {
 				var2++;
 				for (int x = 0; x < map.get(y).size(); x++) {
 
+//					// if WALL
+//					if (map.get(y).get(x) == MapObject.WALL) {
+//						glColor3f(1f, 0f, 0f);
+//						drawRectWall(var1 * (SIZE + 5), var2 * (SIZE + 5), 100,
+//								100, drawingIt);
+//					}
+//
+//					// if OBSTACLE
+//					else if (map.get(y).get(x) == MapObject.OBSTACLE) {
+//						glColor3f(0f, 1f, 0f);
+//
+//						drawRectObstacle(var1 * (SIZE + 5), var2 * (SIZE + 5) , SIZE,
+//								SIZE, drawingIt);
+//					}
+//
+//					// if EMPTY
+//					else if (map.get(y).get(x) == MapObject.EMPTY) {
+//						glColor3f(0f, 0f, 1f);
+//						drawRectEmpty(var1 * (SIZE + 5), var2 * (SIZE+5), SIZE,
+//								SIZE, drawingIt);
+//					}
+//					var1++;
+//				}
+//				var1 = 0;
+//			}
+					int  a = 2;
 					// if WALL
 					if (map.get(y).get(x) == MapObject.WALL) {
 						glColor3f(1f, 0f, 0f);
-						drawRect(var1, var2, 100,
+						drawRectWall(var1 * a, var2 * a, 100,
 								100, drawingIt);
 					}
 
@@ -119,20 +145,21 @@ public class Map3D extends Thread {
 					else if (map.get(y).get(x) == MapObject.OBSTACLE) {
 						glColor3f(0f, 1f, 0f);
 
-						drawRect(var1, var2 , SIZE,
+						drawRectObstacle(var1 * a, var2 * a, SIZE,
 								SIZE, drawingIt);
 					}
 
 					// if EMPTY
 					else if (map.get(y).get(x) == MapObject.EMPTY) {
 						glColor3f(0f, 0f, 1f);
-						drawRect(var1 , var2 , SIZE,
+						drawRectEmpty(var1 * a, var2 * a, SIZE,
 								SIZE, drawingIt);
 					}
 					var1++;
 				}
 				var1 = 0;
 			}
+
 
 			// if (drawingIt == false)
 			// drawingIt = true;
@@ -145,49 +172,212 @@ public class Map3D extends Thread {
 	}
 
 
-	private static void drawRect(float x, float y, float width, float height, boolean banana) {
-		if (banana) {
-			glPushMatrix();
-			{
-				glTranslatef(x, y, 0);
-				glBegin(GL_QUADS);
-				{
+//	private static void drawRect(float x, float y, float width, float height, boolean banana) {
+//		if (banana) {
+//			glPushMatrix();
+//			{
+//				glTranslatef(x, y, 0);
+//				glBegin(GL_QUADS);
+//				{
 
-					// Frontface
-					glTexCoord2f(0,0); glVertex3f(-1, -1, 1);
-					glTexCoord2f(0,1); glVertex3f(-1, 1, 1);
-					glTexCoord2f(1,1); glVertex3f(1, 1, 1);
-					glTexCoord2f(1,0); glVertex3f(1, -1, 1);
+//					// Frontface
+//					glTexCoord2f(0,0); glVertex3f(-1, -1, 1);
+//					glTexCoord2f(0,1); glVertex3f(-1, 1, 1);
+//					glTexCoord2f(1,1); glVertex3f(1, 1, 1);
+//					glTexCoord2f(1,0); glVertex3f(1, -1, 1);
+//
+//					// Backface
+//					glTexCoord2f(0,0); glVertex3f(-1, -1, -1);
+//					glTexCoord2f(0,1); glVertex3f(-1, 1, -1);
+//					glTexCoord2f(1,1); glVertex3f(1, 1, -1);
+//					glTexCoord2f(1,0); glVertex3f(1, -1, -1);
+//					//
+//					// // BottomFace
+//					glTexCoord2f(0,0); glVertex3f(-1, -1, -1);
+//					glTexCoord2f(0,1); glVertex3f(-1, -1, 1);
+//					glTexCoord2f(1,1); glVertex3f(-1, 1, 1);
+//					glTexCoord2f(1,0); glVertex3f(-1, 1, -1);
+//					//
+//					// // TopFace
+//					glTexCoord2f(0,0); glVertex3f(1, -1, -1);
+//					glTexCoord2f(0,1); glVertex3f(1, -1, 1);
+//					glTexCoord2f(1,1); glVertex3f(1, 1, 1);
+//					glTexCoord2f(1,0); glVertex3f(1, 1, -1);
+//					//
+//					// // LeftFace
+//					glTexCoord2f(0,0); glVertex3f(-1, -1, -1);
+//					glTexCoord2f(0,1); glVertex3f(1, -1, -1);
+//					glTexCoord2f(1,1); glVertex3f(1, -1, 1);
+//					glTexCoord2f(1,0); glVertex3f(-1, -1, 1);
+//					//
+//					// // RightFace
+//					glTexCoord2f(0,0); glVertex3f(-1, 1, -1);
+//					glTexCoord2f(0,1); glVertex3f(1, 1, -1);
+//					glTexCoord2f(1,1); glVertex3f(1, 1, 1);
+//					glTexCoord2f(1,0); glVertex3f(-1, 1, 1);
+					
+					private static void drawRectWall(float x, float y, float width, float height, boolean banana) {
+						if (banana) {
+							glPushMatrix();
+							{
+								glTranslatef(x, y, 0);
+								glBegin(GL_QUADS);
+								{
+								
+					//wall
+//					glColor3f(0.0f,1.0f,0.0f);          // Set The Color To Green
+					
+					glVertex3f( 1.0f, 1.0f,-1f);          // Top Right Of The Quad (Top)
+					glVertex3f(-1.0f, 1.0f,-1f);          // Top Left Of The Quad (Top)
+					glVertex3f(-1.0f, 1.0f, 1.0f);          // Bottom Left Of The Quad (Top)
+					glVertex3f( 1.0f, 1.0f, 1.0f);          // Bottom Right Of The Quad (Top)
+					
+//					glColor3f(1.0f,0.5f,0.0f);          // Set The Color To Orange
+					
+					glVertex3f( 1.0f,-1.0f, 1.0f);          // Top Right Of The Quad (Bottom)
+					glVertex3f(-1.0f,-1.0f, 1.0f);          // Top Left Of The Quad (Bottom)
+					glVertex3f(-1.0f,-1.0f,-1f);          // Bottom Left Of The Quad (Bottom)
+					glVertex3f( 1.0f,-1.0f,-1f);          // Bottom Right Of The Quad (Bottom)
+					
+//					glColor3f(1.0f,0.0f,0.0f);          // Set The Color To Red
+					
+					glVertex3f( 1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Front)
+					glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Left Of The Quad (Front)
+					glVertex3f(-1.0f,-1.0f, 1.0f);          // Bottom Left Of The Quad (Front)
+					glVertex3f( 1.0f,-1.0f, 1.0f);          // Bottom Right Of The Quad (Front)
+					
+//					glColor3f(1.0f,1.0f,0.0f);          // Set The Color To Yellow
+					
+					glVertex3f( 1.0f,-1.0f,-1.0f);          // Bottom Left Of The Quad (Back)
+					glVertex3f(-1.0f,-1.0f,-1.0f);          // Bottom Right Of The Quad (Back)
+					glVertex3f(-1.0f, 1.0f,-1.0f);          // Top Right Of The Quad (Back)
+					glVertex3f( 1.0f, 1.0f,-1.0f);          // Top Left Of The Quad (Back)
 
-					// Backface
-					glTexCoord2f(0,0); glVertex3f(-1, -1, -1);
-					glTexCoord2f(0,1); glVertex3f(-1, 1, -1);
-					glTexCoord2f(1,1); glVertex3f(1, 1, -1);
-					glTexCoord2f(1,0); glVertex3f(1, -1, -1);
-					//
-					// // BottomFace
-					glTexCoord2f(0,0); glVertex3f(-1, -1, -1);
-					glTexCoord2f(0,1); glVertex3f(-1, -1, 1);
-					glTexCoord2f(1,1); glVertex3f(-1, 1, 1);
-					glTexCoord2f(1,0); glVertex3f(-1, 1, -1);
-					//
-					// // TopFace
-					glTexCoord2f(0,0); glVertex3f(1, -1, -1);
-					glTexCoord2f(0,1); glVertex3f(1, -1, 1);
-					glTexCoord2f(1,1); glVertex3f(1, 1, 1);
-					glTexCoord2f(1,0); glVertex3f(1, 1, -1);
-					//
-					// // LeftFace
-					glTexCoord2f(0,0); glVertex3f(-1, -1, -1);
-					glTexCoord2f(0,1); glVertex3f(1, -1, -1);
-					glTexCoord2f(1,1); glVertex3f(1, -1, 1);
-					glTexCoord2f(1,0); glVertex3f(-1, -1, 1);
-					//
-					// // RightFace
-					glTexCoord2f(0,0); glVertex3f(-1, 1, -1);
-					glTexCoord2f(0,1); glVertex3f(1, 1, -1);
-					glTexCoord2f(1,1); glVertex3f(1, 1, 1);
-					glTexCoord2f(1,0); glVertex3f(-1, 1, 1);
+//					glColor3f(0.0f,0.0f,1.0f);          // Set The Color To Blue
+					
+					glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Left)
+					glVertex3f(-1.0f, 1.0f,-1.0f);          // Top Left Of The Quad (Left)
+					glVertex3f(-1.0f,-1.0f,-1.0f);          // Bottom Left Of The Quad (Left)
+					glVertex3f(-1.0f,-1.0f, 1.0f);          // Bottom Right Of The Quad (Left)
+					
+//			        glColor3f(1.0f,0.0f,1.0f);          // Set The Color To Violet
+			        
+			        glVertex3f( 1.0f, 1.0f,-1.0f);          // Top Right Of The Quad (Right)
+			        glVertex3f( 1.0f, 1.0f, 1.0f);          // Top Left Of The Quad (Right)
+			        glVertex3f( 1.0f,-1.0f, 1.0f);          // Bottom Left Of The Quad (Right)
+			        glVertex3f( 1.0f,-1.0f,-1.0f);          // Bottom Right Of The Quad (Right)
+								}
+								glEnd();
+							}
+							glPopMatrix();
+						}
+					}
+					
+					private static void drawRectEmpty(float x, float y, float width, float height, boolean banana) {
+						if (banana) {
+							glPushMatrix();
+							{
+								glTranslatef(x, y, 0);
+								glBegin(GL_QUADS);
+								{
+			        //Empty
+//			        glColor3f(0.0f,1.0f,0.0f);          // Set The Color To Green
+					
+					glVertex3f( 1.0f, 1.0f,0.5f);          // Top Right Of The Quad (Top)
+					glVertex3f(-1.0f, 1.0f,0.5f);          // Top Left Of The Quad (Top)
+					glVertex3f(-1.0f, 1.0f, 1.0f);          // Bottom Left Of The Quad (Top)
+					glVertex3f( 1.0f, 1.0f, 1.0f);          // Bottom Right Of The Quad (Top)
+					
+//					glColor3f(1.0f,0.5f,0.0f);          // Set The Color To Orange
+					
+					glVertex3f( 1.0f,-1.0f, 1.0f);          // Top Right Of The Quad (Bottom)
+					glVertex3f(-1.0f,-1.0f, 1.0f);          // Top Left Of The Quad (Bottom)
+					glVertex3f(-1.0f,-1.0f,0.5f);          // Bottom Left Of The Quad (Bottom)
+					glVertex3f( 1.0f,-1.0f,0.5f);          // Bottom Right Of The Quad (Bottom)
+					
+//					glColor3f(1.0f,0.0f,0.0f);          // Set The Color To Red
+					
+					glVertex3f( 1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Front)
+					glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Left Of The Quad (Front)
+					glVertex3f(-1.0f,-1.0f, 1.0f);          // Bottom Left Of The Quad (Front)
+					glVertex3f( 1.0f,-1.0f, 1.0f);          // Bottom Right Of The Quad (Front)
+					
+//					glColor3f(1.0f,1.0f,0.0f);          // Set The Color To Yellow
+					
+					glVertex3f( 1.0f,-1.0f, 0.5f);          // Bottom Left Of The Quad (Back)
+					glVertex3f(-1.0f,-1.0f, 0.5f);          // Bottom Right Of The Quad (Back)
+					glVertex3f(-1.0f, 1.0f, 0.5f);          // Top Right Of The Quad (Back)
+					glVertex3f( 1.0f, 1.0f, 0.5f);          // Top Left Of The Quad (Back)
+
+//					glColor3f(0.0f,0.0f,1.0f);          // Set The Color To Blue
+					
+					glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Left)
+					glVertex3f(-1.0f, 1.0f,0.5f);          // Top Left Of The Quad (Left)
+					glVertex3f(-1.0f,-1.0f,0.5f);          // Bottom Left Of The Quad (Left)
+					glVertex3f(-1.0f,-1.0f, 1.0f);          // Bottom Right Of The Quad (Left)
+					
+//			        glColor3f(1.0f,0.0f,1.0f);          // Set The Color To Violet
+			        
+			        glVertex3f( 1.0f, 1.0f, 0.5f);          // Top Right Of The Quad (Right)
+			        glVertex3f( 1.0f, 1.0f, 1.0f);          // Top Left Of The Quad (Right)
+			        glVertex3f( 1.0f,-1.0f, 1.0f);          // Bottom Left Of The Quad (Right)
+			        glVertex3f( 1.0f,-1.0f, 0.5f);          // Bottom Right Of The Quad (Right)
+								}
+								glEnd();
+							}
+							glPopMatrix();
+						}
+					}
+			        
+					private static void drawRectObstacle(float x, float y, float width, float height, boolean banana) {
+						if (banana) {
+							glPushMatrix();
+							{
+								glTranslatef(x, y, 0);
+								glBegin(GL_QUADS);
+								{
+			        //Obstacle
+//			        glColor3f(0.0f,1.0f,0.0f);          // Set The Color To Green
+					
+					glVertex3f( 1.0f, 1.0f,-1f);          // Top Right Of The Quad (Top)
+					glVertex3f(-1.0f, 1.0f,-1f);          // Top Left Of The Quad (Top)
+					glVertex3f(-1.0f, 1.0f, 1.0f);          // Bottom Left Of The Quad (Top)
+					glVertex3f( 1.0f, 1.0f, 1.0f);          // Bottom Right Of The Quad (Top)
+					
+//					glColor3f(1.0f,0.5f,0.0f);          // Set The Color To Orange
+					
+					glVertex3f( 1.0f,-1.0f, 1.0f);          // Top Right Of The Quad (Bottom)
+					glVertex3f(-1.0f,-1.0f, 1.0f);          // Top Left Of The Quad (Bottom)
+					glVertex3f(-1.0f,-1.0f,-1f);          // Bottom Left Of The Quad (Bottom)
+					glVertex3f( 1.0f,-1.0f,-1f);          // Bottom Right Of The Quad (Bottom)
+					
+//					glColor3f(1.0f,0.0f,0.0f);          // Set The Color To Red
+					
+					glVertex3f( 1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Front)
+					glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Left Of The Quad (Front)
+					glVertex3f(-1.0f,-1.0f, 1.0f);          // Bottom Left Of The Quad (Front)
+					glVertex3f( 1.0f,-1.0f, 1.0f);          // Bottom Right Of The Quad (Front)
+					
+//					glColor3f(1.0f,1.0f,0.0f);          // Set The Color To Yellow
+					
+					glVertex3f( 1.0f,-1.0f,-1.0f);          // Bottom Left Of The Quad (Back)
+					glVertex3f(-1.0f,-1.0f,-1.0f);          // Bottom Right Of The Quad (Back)
+					glVertex3f(-1.0f, 1.0f,-1.0f);          // Top Right Of The Quad (Back)
+					glVertex3f( 1.0f, 1.0f,-1.0f);          // Top Left Of The Quad (Back)
+
+//					glColor3f(0.0f,0.0f,1.0f);          // Set The Color To Blue
+					
+					glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Left)
+					glVertex3f(-1.0f, 1.0f,-1.0f);          // Top Left Of The Quad (Left)
+					glVertex3f(-1.0f,-1.0f,-1.0f);          // Bottom Left Of The Quad (Left)
+					glVertex3f(-1.0f,-1.0f, 1.0f);          // Bottom Right Of The Quad (Left)
+					
+//			        glColor3f(1.0f,0.0f,1.0f);          // Set The Color To Violet
+			        
+			        glVertex3f( 1.0f, 1.0f,-1.0f);          // Top Right Of The Quad (Right)
+			        glVertex3f( 1.0f, 1.0f, 1.0f);          // Top Left Of The Quad (Right)
+			        glVertex3f( 1.0f,-1.0f, 1.0f);          // Bottom Left Of The Quad (Right)
+			        glVertex3f( 1.0f,-1.0f,-1.0f);          // Bottom Right Of The Quad (Right)
 				}
 				glEnd();
 			}
