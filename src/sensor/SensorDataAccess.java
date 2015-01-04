@@ -1,9 +1,9 @@
-package util;
+package sensor;
 
 import exceptions.NoSensorDataAvailableException;
 
 public class SensorDataAccess {
-
+	// -1.0f indicates that no data from the sensor has been set yet
 	private static float uss_f  = -1.0f;
 	private static float uss_rf = -1.0f;
 	private static float uss_rb = -1.0f;
@@ -22,14 +22,14 @@ public class SensorDataAccess {
 
 	public static float getUss_rf() throws NoSensorDataAvailableException {
 		if (uss_rf == -1.0f) {
-			throw new exceptions.NoSensorDataAvailableException("rightUpper Sensor");
+			throw new exceptions.NoSensorDataAvailableException("right front Sensor");
 		}
 		return uss_rf;
 	}
 	
 	public static float getUss_rb() throws NoSensorDataAvailableException {
 		if (uss_rb == -1.0f) {
-			throw new exceptions.NoSensorDataAvailableException("rightDowner Sensor");
+			throw new exceptions.NoSensorDataAvailableException("right back Sensor");
 		}
 		return uss_rb;
 	}

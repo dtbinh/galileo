@@ -1,7 +1,8 @@
-package util;
+package sensor;
 
 import java.net.DatagramPacket;
 
+import util.PacketHandler;
 import main.RunSettings;
 import network.Net;
 import network.NetSettings;
@@ -22,7 +23,7 @@ public class SensorReceiveThread extends Thread {
 			SensorDataAccess.setUss_rf(sensorValues[1]);
 			SensorDataAccess.setUss_rb(sensorValues[2]);
 			
-			if (RunSettings.debug) {
+			if (RunSettings.debugSensor) {
 				System.out.println();
 				System.out.print("uss_f:  " + sensorValues[0] + "\t");
 				System.out.print("uss_rf: " + sensorValues[1] + "\t");

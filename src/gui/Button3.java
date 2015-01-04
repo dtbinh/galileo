@@ -1,10 +1,10 @@
 package gui;
+
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
-import movement.Movements;
 import network.Net;
 import network.NetSettings;
 
@@ -48,7 +48,7 @@ public class Button3 {
    }
    
    
-   private void showButton(){
+   public void showButton(){
 	   //Die Button Vorbereiten.
       JButton Forward = new JButton("Forward");        
       JButton Backward = new JButton("Backward");

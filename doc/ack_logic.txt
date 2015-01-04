@@ -34,3 +34,10 @@ Now, what can happen?:
 			=> serial numbers (or acknowledgment numbers, command numbers, .. )
 
 
+Implementation:
+	receiveSocket.setSoTimeout(timeout);
+	
+	PROBLEM: SocketTimeoutException cannot be catched..
+	
+	maybe you can check if something has been written into the packet.. therefore we can check if an timeoutException has been thrown or not
+

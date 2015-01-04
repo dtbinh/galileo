@@ -1,5 +1,6 @@
-package util;
+package sensor;
 
+import util.PacketHandler;
 import lejos.hardware.Brick;
 import lejos.hardware.BrickFinder;
 import lejos.hardware.Key;
@@ -54,7 +55,7 @@ public class SensorSendingThread extends Thread {
 			// send packet to pc
 			Net.send(NetSettings.getPcIp(), NetSettings.getPcPort(), sendData);
 			
-			if (RunSettings.debug) {
+			if (RunSettings.debugSensor) {
 				LCD.clear(1);
 				LCD.drawString("uss_f:  " + ultra_sample_f[0], 0, 1);
 				

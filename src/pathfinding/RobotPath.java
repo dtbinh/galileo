@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import exceptions.NoSensorDataAvailableException;
+import sensor.SensorDataAccess;
 import util.CSVFile;
-import util.SensorDataAccess;
 import mapping.Map;
 import network.Net;
 import network.NetSettings;
@@ -41,7 +41,6 @@ public class RobotPath { // This class implements the general behaviour
 			}
 		} catch (NoSensorDataAvailableException e) {
 			System.out.println("Currently no reasonable data on " + e.sensorString);
-			e.printStackTrace();
 		}
 		this.parallelToWall = false;
 		return parallelToWall;
@@ -150,7 +149,6 @@ public class RobotPath { // This class implements the general behaviour
 				}
 			} catch (NoSensorDataAvailableException e) {
 				System.out.println("Currently no reasonable Data on " + e.sensorString);
-				e.printStackTrace();
 			}
 		}
 	}
@@ -165,12 +163,11 @@ public class RobotPath { // This class implements the general behaviour
 			Net.sendRobotCmd(NetSettings.getEv2Ip(), NetSettings.getRobotPort(), 101);
 			drivenDistance += 0.01;
 			try {
-				if(util.SensorDataAccess.getUss_f() < 0.03) {
+				if(sensor.SensorDataAccess.getUss_f() < 0.03) {
 					break;
 				}
 			} catch (NoSensorDataAvailableException e) {
 				System.out.println("Currently no reasonable data on " + e.sensorString);
-				e.printStackTrace();
 			}
 		}
 		return drivenDistance;

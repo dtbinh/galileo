@@ -1,8 +1,9 @@
 package main;
 
+import gui.GuiControl;
 import pathfinding.RobotPath;
+import sensor.SensorReceiveThread;
 import util.ConfigFiles;
-import util.SensorReceiveThread;
 import mapping.Map;
 
 public class ComputerMain {
@@ -10,12 +11,14 @@ public class ComputerMain {
 	
 	public static void main(String[] args) {
 		ConfigFiles.read();
-		//printRobotSettings();
 		
-		//Net.receiveInfo();
+		if (RunSettings.gui) {
+			new GuiControl().start();
+		}
+		
 		new SensorReceiveThread().start();
 		
-		if (RunSettings._2D) {
+		if (RunSettings.map_2D) {
 			new mapping.history.Map2D().start();
 		} else {
 			new mapping.history.Map3D().start();

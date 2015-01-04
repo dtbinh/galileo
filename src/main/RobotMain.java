@@ -1,6 +1,6 @@
 package main;
 
-import util.SensorSendingThread;
+import sensor.SensorSendingThread;
 
 public class RobotMain {
 
