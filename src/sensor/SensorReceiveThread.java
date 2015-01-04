@@ -2,6 +2,7 @@ package sensor;
 
 import java.net.DatagramPacket;
 
+import util.CSVFile;
 import util.PacketHandler;
 import main.RunSettings;
 import network.Net;
@@ -22,6 +23,8 @@ public class SensorReceiveThread extends Thread {
 			SensorDataAccess.setUss_f(sensorValues[0]);
 			SensorDataAccess.setUss_rf(sensorValues[1]);
 			SensorDataAccess.setUss_rb(sensorValues[2]);
+			
+			CSVFile.write(CSVFile.robotDataFilename, "EV2", receiveData);
 			
 			if (RunSettings.debugSensor) {
 				System.out.println();
