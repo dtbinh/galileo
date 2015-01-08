@@ -1,10 +1,5 @@
 network/Net.java:
 	- ACK logic unimplemented
-	- convenience function for sending ACKs unimplemented
-	
-	
-util/PacketHandler.java:
-	- convenience function for reading acknowledgement packets unimplemented
 	
 
 
