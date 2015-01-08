@@ -1,5 +1,6 @@
 package main;
 
+import lejos.hardware.lcd.LCD;
 import movement.Movements;
 import network.Net;
 import network.NetSettings;
@@ -14,16 +15,24 @@ public class ClientControl {
 		while ( input != 0){
 			//0 to stop the client the value should be
 			//0 to stop the current process, while it's running
-			System.out.println("waiting for cmd");
+			LCD.clear(4);
+			LCD.drawString("waiting for cmd", 0, 4);
+			
 			short received = Net.receiveRobotCmd(NetSettings.getRobotPort());
 			input = received;
-			System.out.println("received: " + received);
+			
+			LCD.clear(5);
+			LCD.drawString("received: " + received, 0, 5);
 			
 			// just a testing input
 			if(input == 99) {
 				movements.rotate(360);	// turns wheels by 360 degree
 										// wheel has a perimeter of about 18 cm
 										// therefore it should move 18 cm forward
+			}
+			//test input turn 90 degrees
+			if(input == 77){
+				movements.rotate(190);
 			}
 			
 			// to drive forward the value of the entry should be between 101 and 200
