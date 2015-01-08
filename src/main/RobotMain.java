@@ -16,14 +16,10 @@ public class RobotMain {
 		cc.run();
 	}
 	
-	/* if you want to receive the data on the computer to
-	 * you have to start sensorTest() in ComputerMain too! */
-
 	
 	private static String getNetConfigPathOnRobot() {
 		String dir = System.getProperty("user.dir");
 		String classname = RobotMain.class.getSimpleName();
 		return dir + "/" + classname + ".jar" + "/" + "network/net.properties";
 	}
-
 }
