@@ -55,7 +55,7 @@ public class SensorSendingThread extends Thread {
 			// send packet to pc
 			Net.send(NetSettings.getPcIp(), NetSettings.getPcPort(), sendData);
 			
-			if (RunSettings.debugSensor) {
+			//if (RunSettings.debugSensor) {
 				LCD.clear(1);
 				LCD.drawString("uss_f:  " + ultra_sample_f[0], 0, 1);
 				
@@ -64,8 +64,8 @@ public class SensorSendingThread extends Thread {
 				
 				LCD.clear(3);
 				LCD.drawString("uss_rb: " + ultra_sample_rb[0], 0, 3);
-			}
-			Delay.msDelay(333);		// 3 packets per minute
+			//}
+			Delay.msDelay(200);		// 3 packets per minute
 		}
 
 		// Close sensors
