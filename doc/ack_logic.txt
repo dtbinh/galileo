@@ -37,7 +37,6 @@ Now, what can happen?:
 Implementation:
 	receiveSocket.setSoTimeout(timeout);
 	
-	PROBLEM: SocketTimeoutException cannot be catched..
+	can be catched with 'catch (InterruptedIOException e)'
 	
-	maybe you can check if something has been written into the packet.. therefore we can check if an timeoutException has been thrown or not
 
