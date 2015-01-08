@@ -1,6 +1,9 @@
 package main;
 
+import network.Net;
+import network.NetSettings;
 import gui.GuiControl;
+import pathfinding.Puffi;
 import pathfinding.RobotPath;
 import sensor.SensorReceiveThread;
 import util.ConfigFiles;
@@ -9,8 +12,8 @@ import mapping.Map;
 public class ComputerMain {
 	private static Map map = new Map();
 	
-	public static void main(String[] args) {
-		ConfigFiles.read();
+	public static void main(String[] args) throws InterruptedException {
+//		ConfigFiles.read();
 		
 		if (RunSettings.gui) {
 			new GuiControl().start();
@@ -23,9 +26,9 @@ public class ComputerMain {
 		} else {
 			new mapping.history.Map3D().start();
 		}
-		
-		RobotPath r = new RobotPath();
-		r.run(map);
+//		RobotPath r = new RobotPath();
+		Puffi p = new Puffi(map);
+		p.run();
 	}
 	
 	public static Map getMap() {
