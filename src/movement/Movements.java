@@ -17,7 +17,7 @@ public class Movements{
 	
 	public void rotate(int angle) {
 		
-		this.leftMotor.rotate(angle, true);
+		this.leftMotor.rotate(-angle, true);
 		this.rightMotor.rotate(angle, true);
 	
 	}
