@@ -150,8 +150,8 @@ public class Net {
 	 * Convenience way of sending an ACKnowledgement packet from robot to pc
 	 */
 	public static void sendACK( ) {
-		byte[] data = PacketHandler.makeACKPacket(ackNr);
-		send(NetSettings.getPcIp(), NetSettings.getPcPort(), data);
+//		byte[] data = PacketHandler.makeACKPacket(ackNr);
+//		send(NetSettings.getPcIp(), NetSettings.getPcPort(), data);
 	}
 	
 	
