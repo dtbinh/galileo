@@ -1,0 +1,15 @@
+UltraSonicSensors:
+==================
+Values are represented by float values
+	2.0		means	2 meter
+	1.0		means	1 meter
+	0.1		means	30 centimeters
+	0.05	means	5 centimeters
+	Infinity	value > 2.4x
+	Infinity	value < 0.03
+
+Which values can you trust?
+	value < 0.03 are buggy..	(e.g. sometimes it shows 1 meter or Infinity or 7 cm..)
+	value > 2.4x show Infinity
+	
+	so, you can trust values till 2 meters and above 4 or 5 cm in every case!
