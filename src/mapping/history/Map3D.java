@@ -125,6 +125,11 @@ public class Map3D extends Thread {
 						glColor3f(0f, 0f, 1f);
 						drawRectEmpty(var1 * a, var2 * a, drawingIt);
 					}
+					// if ROBOT
+					else if (map.get(y).get(x) == MapObject.ROBOT) {
+						glColor3f(1f, 1f, 1f);
+						drawRectObstacle(var1 * a, var2 * a, drawingIt);
+					}
 					var1++;
 				}
 				var1 = 0;
