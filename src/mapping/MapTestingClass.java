@@ -34,6 +34,7 @@ public class MapTestingClass {
 		MapObject wall = MapObject.WALL;
 		MapObject empty = MapObject.EMPTY;
 		MapObject obstacle = MapObject.OBSTACLE;
+		MapObject robot = MapObject.ROBOT;
 		map3.get(2).set(2, obstacle);
 
 		MapObject[] mapObjects = new MapObject[20];
@@ -48,6 +49,7 @@ public class MapTestingClass {
 
 		mapObjects[3] = empty;
 		mapObjects[9] = obstacle;
+		
 
 		map.buildMapFromOneDimensionalArray(mapObjects, 4);
 		map2.buildMapFromOneDimensionalArrayList(mapObjectsList, 4);

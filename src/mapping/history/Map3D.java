@@ -104,31 +104,8 @@ public class Map3D extends Thread {
 				var2++;
 				for (int x = 0; x < map.get(y).size(); x++) {
 
-					// // if WALL
-					// if (map.get(y).get(x) == MapObject.WALL) {
-					// glColor3f(1f, 0f, 0f);
-					// drawRectWall(var1 * (SIZE + 5), var2 * (SIZE + 5),
-					// drawingIt);
-					// }
-					//
-					// // if OBSTACLE
-					// else if (map.get(y).get(x) == MapObject.OBSTACLE) {
-					// glColor3f(0f, 1f, 0f);
-					//
 					// drawRectObstacle(var1 * (SIZE + 5), var2 * (SIZE + 5) ,
 					// drawingIt);
-					// }
-					//
-					// // if EMPTY
-					// else if (map.get(y).get(x) == MapObject.EMPTY) {
-					// glColor3f(0f, 0f, 1f);
-					// drawRectEmpty(var1 * (SIZE + 5), var2 * (SIZE+5),
-					// drawingIt);
-					// }
-					// var1++;
-					// }
-					// var1 = 0;
-					// }
 					int a = 2;
 					// if WALL
 					if (map.get(y).get(x) == MapObject.WALL) {

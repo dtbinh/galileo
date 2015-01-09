@@ -21,8 +21,8 @@ public class Map2D extends Thread {
 	private final static int SIZE = 20;
 	private static boolean drawingIt = true;
 
-	//public static Map map = new mapping.MapTestingClass().map;
-	public static Map map = ComputerMain.getMap();
+	public static Map map = new mapping.MapTestingClass().map;
+//	public static Map map = ComputerMain.getMap();
 
 	 public void run() {
 		 System.out.println(map.toString());
@@ -64,6 +64,10 @@ public class Map2D extends Thread {
 						glColor3f(0.80f, 0.20f, 0.98f);
 						drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
 								SIZE, drawingIt);
+					} else if (map.get(y).get(x) == MapObject.ROBOT) {
+							glColor3f(0.30f, 0.20f, 0.28f);
+							drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
+									SIZE, drawingIt);
 					}
 					var1++;
 				}

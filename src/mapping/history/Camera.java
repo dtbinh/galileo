@@ -45,7 +45,7 @@ public class Camera {
 
 		glEnable(GL_DEPTH_TEST);
 		//for texture
-//		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_TEXTURE_2D);
 	}
 
 	public void useView() {
