@@ -4,8 +4,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 import static org.lwjgl.util.glu.GLU.*;
 
-
-public class Camera {
+public class CameraMap3D {
 
 	// positioning
 	// - where our camera is
@@ -22,7 +21,7 @@ public class Camera {
 	private float near;
 	private float far;
 
-	public Camera(float fov, float aspect, float near, float far) {
+	public CameraMap3D(float fov, float aspect, float near, float far) {
 		x = 0;
 		y = 0;
 		z = -20;
@@ -44,7 +43,7 @@ public class Camera {
 		glMatrixMode(GL_MODELVIEW);
 
 		glEnable(GL_DEPTH_TEST);
-		//for texture
+		// for texture
 		glEnable(GL_TEXTURE_2D);
 	}
 
@@ -112,12 +111,12 @@ public class Camera {
 	public void rotateY(float amt) {
 		ry += amt;
 	}
-	
+
 	public void rotateX(float amt) {
 		rx += amt;
 	}
-	
-	public void upDown(float amt){
+
+	public void upDown(float amt) {
 		y += amt;
 	}
 }

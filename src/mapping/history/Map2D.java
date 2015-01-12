@@ -8,7 +8,6 @@ import mapping.Map;
 import mapping.MapObject;
 //import main.Main_Computer;
 
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -22,17 +21,16 @@ public class Map2D extends Thread {
 	private static boolean drawingIt = true;
 
 	public static Map map = new mapping.MapTestingClass().map;
-//	public static Map map = ComputerMain.getMap();
 
-	 public void run() {
-		 System.out.println(map.toString());
-		 initDisplay();
-		 initGL();
-		 gameLoop();
-		 cleanUp();
-	 }
+	// public static Map map = ComputerMain.getMap();
 
-	// old main -> now as thread
+	public void run() {
+		System.out.println(map.toString());
+		initDisplay();
+		initGL();
+		gameLoop();
+		cleanUp();
+	}
 
 	public static void main(String[] args) {
 		System.out.println(map.toString());
@@ -65,19 +63,15 @@ public class Map2D extends Thread {
 						drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
 								SIZE, drawingIt);
 					} else if (map.get(y).get(x) == MapObject.ROBOT) {
-							glColor3f(0.30f, 0.20f, 0.28f);
-							drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
-									SIZE, drawingIt);
+						glColor3f(0.30f, 0.20f, 0.28f);
+						drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
+								SIZE, drawingIt);
 					}
 					var1++;
 				}
 				var1 = 0;
 			}
 
-//			 if (drawingIt == false)
-//			 drawingIt = true;
-//			 else
-//			 drawingIt = false;
 			Display.update();
 		}
 	}
@@ -129,8 +123,7 @@ public class Map2D extends Thread {
 			Display.setDisplayMode(new DisplayMode(WINDOW_WIDTH, WINDOW_HEIGHT));
 			Display.create();
 		} catch (LWJGLException ex) {
-			Logger.getLogger(Map2D.class.getName()).log(Level.SEVERE,
-					null, ex);
+			Logger.getLogger(Map2D.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 }

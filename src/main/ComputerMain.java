@@ -23,7 +23,7 @@ public class ComputerMain {
 		if (RunSettings.map_2D) {
 			new mapping.history.Map2D().start();
 		} else {
-			new mapping.history.Map3D().start();
+			new mapping.history.MainMap3D().start();
 		}
 //		RobotPath r = new RobotPath();
 		Puffi p = new Puffi(map);
