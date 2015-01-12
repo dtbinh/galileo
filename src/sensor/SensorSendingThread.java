@@ -18,7 +18,7 @@ public class SensorSendingThread extends Thread {
 	public void run() {
 		/* Steps to initialize the sensors */
 		Brick brick = BrickFinder.getDefault();
-		//Port s1 = brick.getPort("S1");
+		Port s1 = brick.getPort("S1");
 		Port s2 = brick.getPort("S2");
 		Port s3 = brick.getPort("S3");
 		Port s4 = brick.getPort("S4");
@@ -33,9 +33,13 @@ public class SensorSendingThread extends Thread {
 		EV3UltrasonicSensor ev3_ultra_rb = new EV3UltrasonicSensor(s2);
 		SampleProvider sample_ev3_ultra_rb = ev3_ultra_rb.getMode("Distance");
 		
+		EV3UltrasonicSensor ev3_ultra_lb = new EV3UltrasonicSensor(s1);
+		SampleProvider sample_ev3_ultra_lb = ev3_ultra_lb.getMode("Distance");
+		
 		float ultra_sample_f[] = new float[1];
 		float ultra_sample_rf[] = new float[1];
 		float ultra_sample_rb[] = new float[1];
+		float ultra_sample_lb[] = new float[1];
 		
 		// save storage for sending data
 		byte[] sendData = new byte[NetSettings.getPacketSize()];
@@ -49,8 +53,9 @@ public class SensorSendingThread extends Thread {
 			sample_ev3_ultra_f.fetchSample(ultra_sample_f, 0);
 			sample_ev3_ultra_rf.fetchSample(ultra_sample_rf, 0);
 			sample_ev3_ultra_rb.fetchSample(ultra_sample_rb, 0);
+			sample_ev3_ultra_lb.fetchSample(ultra_sample_lb, 0);
 			
-			sendData = PacketHandler.makeSensorPacket(ultra_sample_f[0], ultra_sample_rf[0], ultra_sample_rb[0]);
+			sendData = PacketHandler.makeSensorPacket(ultra_sample_f[0], ultra_sample_rf[0], ultra_sample_rb[0],ultra_sample_lb[0]);
 			
 			// send packet to pc
 			Net.send(NetSettings.getPcIp(), NetSettings.getPcPort(), sendData);
@@ -64,11 +69,15 @@ public class SensorSendingThread extends Thread {
 				
 				LCD.clear(3);
 				LCD.drawString("uss_rb: " + ultra_sample_rb[0], 0, 3);
+				
+				LCD.clear(3);
+				LCD.drawString("uss_lb: " + ultra_sample_lb[0], 0, 4);
 			//}
 			Delay.msDelay(200);		// 3 packets per minute
 		}
 
 		// Close sensors
+		ev3_ultra_lb.close();
 		ev3_ultra_rf.close();
 		ev3_ultra_rb.close();
 		ev3_ultra_f.close();
