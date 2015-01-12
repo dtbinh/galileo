@@ -1,5 +1,5 @@
 package mapping;
 
 public enum MapObject {
-	WALL,EMPTY,OBSTACLE
+	WALL,EMPTY,OBSTACLE, ROBOT
 }

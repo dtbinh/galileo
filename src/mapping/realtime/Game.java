@@ -46,7 +46,7 @@ public class Game {
 		for (GameObject go : objects)
 			go.render();
 
-		Display.setTitle("Wer das liest kann lesen");
+		Display.setTitle("I AM YOUR WINDOW");
 	}
 
 }

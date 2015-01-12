@@ -29,19 +29,19 @@ public class Puffi {
 			drivenDistance = driveTillContact();
 			if (round == 0) {
 //				System.out.println("driven distance " + drivenDistance);
-				 map.updateMapFromVectors(new TestVector((drivenDistance+2),0));
+				 map.updateMapFromVectors(new TestVector((drivenDistance+4),0));
 //				map.updateMapFromVectors(new TestVector(5, 0));
 			} else if (round == 1) {
 //				System.out.println("driven distance " + drivenDistance);
-				 map.updateMapFromVectors(new TestVector(0,(drivenDistance+1)));
+				 map.updateMapFromVectors(new TestVector(0,(drivenDistance+2)));
 //				map.updateMapFromVectors(new TestVector(0, 5));
 			} else if (round == 2) {
 //				System.out.println("driven distance " + drivenDistance);
-				 map.updateMapFromVectors(new TestVector((-drivenDistance-2),0));
+				 map.updateMapFromVectors(new TestVector((-drivenDistance-4),0));
 //				map.updateMapFromVectors(new TestVector(-5, 0));
 			} else if (round == 3) {
 //				System.out.println("driven distance " + drivenDistance);
-				 map.updateMapFromVectors(new TestVector(0,(-drivenDistance-1)));
+				 map.updateMapFromVectors(new TestVector(0,(-drivenDistance-2)));
 //				map.updateMapFromVectors(new TestVector(0, -5));
 //				System.out.println(""+map.toString());
 			}
@@ -49,10 +49,10 @@ public class Puffi {
 			turnTillSheer();
 			round += 1;
 		}
-//		map.updateMapFromVectors(new TestVector((13+2),0));
-//		map.updateMapFromVectors(new TestVector(0,(13+1)));
-//		map.updateMapFromVectors(new TestVector((-13-2),0));
-//		map.updateMapFromVectors(new TestVector(0,(-13-1)));
+//		map.updateMapFromVectors(new TestVector((28+4),0));
+//		map.updateMapFromVectors(new TestVector(0,(28+2)));
+//		map.updateMapFromVectors(new TestVector((-28-4),0));
+//		map.updateMapFromVectors(new TestVector(0,(-28-2)));
 		round = 0;
 		int mapSize=map.size()+1;
 		ArrayList<TestVector> obstacles = new ArrayList();
@@ -64,25 +64,25 @@ public class Puffi {
 //				System.out.println("Vector x: "+vector.x);
 //				System.out.println("Vector y: "+vector.y);
 				for(TestVector obstacle :  obstacles){
-					map.insertObstacle((obstacle.x+3),obstacle.y);
+					map.insertObstacle((obstacle.x+6),obstacle.y-1);
 				}
 //				map.insertObstacle((vector.x+3),vector.y);
 			} else if (round == 1) {
 //				System.out.println("Vector x: "+vector.x);
 //				System.out.println("Vector y: "+vector.y);
 				for(TestVector obstacle :  obstacles){
-					map.insertObstacle((obstacle.y+1),(map.size()-(obstacle.x)));
+					map.insertObstacle((obstacle.y),(map.size()-(obstacle.x+5)));
 				}
 				
 			
 			} else if (round == 2) {
 				for(TestVector obstacle :  obstacles){
-					map.insertObstacle(map.size()-(obstacle.x),map.size()-obstacle.y);
+					map.insertObstacle(map.size()-(obstacle.x+3),map.size()-(obstacle.y));
 				}
 			
 			} else if (round == 3) {
 				for(TestVector obstacle :  obstacles){
-					map.insertObstacle((map.size()-(obstacle.y-1)),(obstacle.x+1));
+					map.insertObstacle((map.size()-(obstacle.y-2)),(obstacle.x+4));
 				}
 			
 			}
@@ -158,7 +158,7 @@ public class Puffi {
 	// }
 
 	public void findInitPoint(){
-		drive();
+		driveTillContact();
 		try {
 			turnLeftNinety();
 		} catch (InterruptedException e) {
@@ -166,7 +166,7 @@ public class Puffi {
 			e.printStackTrace();
 		}
 		turnTillSheer();
-		drive();
+		driveTillContact();
 		try {
 			turnLeftNinety();
 		} catch (InterruptedException e) {
@@ -314,7 +314,7 @@ public class Puffi {
 			}else{
 			
 			Net.sendRobotCmd(NetSettings.getEv2Ip(),
-					NetSettings.getRobotPort(), 110); // drive 1 cm forward
+					NetSettings.getRobotPort(), 105); // drive 1 cm forward
 			
 			try {
 				Thread.sleep(1000);
@@ -371,9 +371,9 @@ public class Puffi {
 //					Net.sendRobotCmd(NetSettings.getEv2Ip(),
 //							NetSettings.getRobotPort(), 99);
 					System.out.println("sensorDataLeftBeforeVector: "+ sensorDataLeft);
-					int y = (int)((sensorDataLeft+0.05)*10); //+0.05 to round up if its like 0.09
+					int x = (int)((sensorDataLeft+0.025)*20); //+0.05 to round up if its like 0.09
 //					this.map.insertObstacle(y,distance);
-					obstacles.add(new TestVector(y,distance));
+					obstacles.add(new TestVector(x,distance));
 //					System.out.println("from wall: "+(sensorDataLeft*10));
 //					System.out.println("from other wall: "+distance);
 //					System.out.println("OBJEEECT");
@@ -416,7 +416,7 @@ public class Puffi {
 			}else{
 			
 			Net.sendRobotCmd(NetSettings.getEv2Ip(),
-					NetSettings.getRobotPort(), 110); // drive 1 cm forward
+					NetSettings.getRobotPort(), 105); // drive 1 cm forward
 			
 			try {
 				Thread.sleep(1000);

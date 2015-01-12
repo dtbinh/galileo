@@ -4,7 +4,7 @@ import util.PacketHandler;
 
 public class TestPacketHandler {
 	public static void main(String[] args) {
-		byte[] sensorPacket = PacketHandler.makeSensorPacket(0.35700002f, 0.35700002f, 0.35700002f);
+		byte[] sensorPacket = PacketHandler.makeSensorPacket(0.35700002f, 0.35700002f, 0.35700002f,0.35700002f);
 		
 		short s = 12207;
 		byte[] robotCmdPacket = PacketHandler.makeRobotCommandPacket(s);

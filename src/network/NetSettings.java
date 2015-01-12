@@ -22,7 +22,7 @@ public final class NetSettings {
 	// actually doesn't work on the robot, so set settings always here
 	
 	// COMPUTER SETTINGS
-	private static String PC_IP		= "141.82.173.143";
+	private static String PC_IP		= "141.82.161.68";
 	private static int PC_PORT		= 10000;
 	
 	// ROBOT SETTINGS

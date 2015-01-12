@@ -47,7 +47,7 @@ public class PacketHandler {
 	 * @return	float[] sensordata
 	 */
 	public static float[] getSensordata (byte[] packetbytes) {
-		float[] data = new float[3];
+		float[] data = new float[4];
 		byte[] bytes = new byte[4];
 		// uss_f
 		for(int i=1; i <= 4; ++i)
@@ -63,6 +63,11 @@ public class PacketHandler {
 		for (int i=1; i <= 4; ++i)
 			bytes[i-1] = packetbytes[i+8];
 		data[2] = ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN).getFloat();
+		
+		// uss_lb
+		for (int i=1; i <= 4; ++i)
+			bytes[i-1] = packetbytes[i+12];
+		data[3] = ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN).getFloat();
 		
 		return data;
 	}
@@ -104,7 +109,7 @@ public class PacketHandler {
 		return robotCmdPacket;
 	}
 	
-	public static byte[] makeSensorPacket(float uss_f, float uss_rf, float uss_rb) {
+	public static byte[] makeSensorPacket(float uss_f, float uss_rf, float uss_rb , float uss_lb) {
 		byte[] sensordataArr = new byte[NetSettings.getPacketSize()];
 		sensordataArr[0] = 0;		// set type of packet
 		// fill packet
@@ -114,6 +119,8 @@ public class PacketHandler {
 			sensordataArr[i+5] = (byte)((Float.floatToIntBits(uss_rf) >> ((7 - i) * 8)) & 0xff);
 		for(int i=0; i<4; ++i)
 			sensordataArr[i+9] = (byte)((Float.floatToIntBits(uss_rb) >> ((7 - i) * 8)) & 0xff);
+		for(int i=0; i<4; ++i)
+			sensordataArr[i+13] = (byte)((Float.floatToIntBits(uss_lb) >> ((7 - i) * 8)) & 0xff);
 		return sensordataArr;
 	}
 	

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class MapTestingClass {
 	public static Map map3 = new Map();
-	public static Map map = new Map();
+//	public static Map map = new Map();
 	public static Map map2 = new Map();
 	
 	public static void main(String[] args) {
@@ -34,7 +34,12 @@ public class MapTestingClass {
 		MapObject wall = MapObject.WALL;
 		MapObject empty = MapObject.EMPTY;
 		MapObject obstacle = MapObject.OBSTACLE;
+
 //		map3.get(2).set(2, obstacle);
+
+		MapObject robot = MapObject.ROBOT;
+		map3.get(2).set(2, obstacle);
+
 
 		MapObject[] mapObjects = new MapObject[20];
 		ArrayList<MapObject> mapObjectsList = new ArrayList<MapObject>();
@@ -47,9 +52,10 @@ public class MapTestingClass {
 		}
 
 		mapObjects[3] = empty;
-		mapObjects[9] = obstacle;
+		mapObjects[9] = robot;
+		
 
-		map.buildMapFromOneDimensionalArray(mapObjects, 4);
+//		map.buildMapFromOneDimensionalArray(mapObjects, 4);
 		map2.buildMapFromOneDimensionalArrayList(mapObjectsList, 4);
 
 		// System.out.println(map.toString());

@@ -1,7 +1,5 @@
 package main;
 
-import network.Net;
-import network.NetSettings;
 import gui.GuiControl;
 import pathfinding.Puffi;
 import pathfinding.RobotPath;
@@ -13,7 +11,8 @@ public class ComputerMain {
 	private static Map map = new Map();
 	
 	public static void main(String[] args) throws InterruptedException {
-//		ConfigFiles.read();
+//		ConfigFiles.read();		// don't use, since it doesn't work on the robot yet
+								// change settings in network/NetSettings.java
 		
 		if (RunSettings.gui) {
 			new GuiControl().start();
@@ -24,7 +23,7 @@ public class ComputerMain {
 		if (RunSettings.map_2D) {
 			new mapping.history.Map2D().start();
 		} else {
-			new mapping.history.Map3D().start();
+			new mapping.history.MainMap3D().start();
 		}
 //		RobotPath r = new RobotPath();
 		Puffi p = new Puffi(map);
@@ -34,16 +33,4 @@ public class ComputerMain {
 	public static Map getMap() {
 		return ComputerMain.map;
 	}
-	
-	private static void printRobotSettings() {
-		System.out.println("MotorA: \t" + util.RobotSettings.getMotorA());
-		System.out.println("MotorB: \t" + util.RobotSettings.getMotorB());
-		System.out.println("MotorC: \t" + util.RobotSettings.getMotorC());
-		System.out.println("MotorD: \t" + util.RobotSettings.getMotorD());
-		System.out.println("Sensor1:\t" + util.RobotSettings.getS1());
-		System.out.println("Sensor2:\t" + util.RobotSettings.getS2());
-		System.out.println("Sensor3:\t" + util.RobotSettings.getS3());
-		System.out.println("Sensor4:\t" + util.RobotSettings.getS4());
-	}
-
 }

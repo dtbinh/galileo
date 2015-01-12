@@ -11,7 +11,7 @@ public class TestingSend {
 		} else {
 			Net.sendRobotCmd("127.0.0.1", NetSettings.getPcPort(), 220);
 			Thread.sleep(300);
-			Net.sendSensordata("127.0.0.1", NetSettings.getPcPort(), 0.35700002f, 0.35700002f, 0.35700002f);
+			Net.sendSensordata("127.0.0.1", NetSettings.getPcPort(), 0.35700002f, 0.35700002f, 0.35700002f, 0.35700002f);
 			Thread.sleep(300);
 			Net.sendACK();
 			Thread.sleep(300);

@@ -9,7 +9,6 @@ import lejos.hardware.port.Port;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
-import main.RunSettings;
 import network.Net;
 import network.NetSettings;
 
@@ -47,7 +46,7 @@ public class SensorSendingThread extends Thread {
 		Key escape = brick.getKey("Escape");
 		
 		LCD.clear();
-		Net.sendInfo(NetSettings.getPcIp(), "Sensors running!");
+		
 		// TODO: change to Thread.currentThread().isAlive()
 		while (!escape.isDown()) {
 			sample_ev3_ultra_f.fetchSample(ultra_sample_f, 0);
@@ -73,7 +72,7 @@ public class SensorSendingThread extends Thread {
 				LCD.clear(3);
 				LCD.drawString("uss_lb: " + ultra_sample_lb[0], 0, 4);
 			//}
-			Delay.msDelay(200);		// 3 packets per minute
+			Delay.msDelay(200);		// 5 packets per second
 		}
 
 		// Close sensors

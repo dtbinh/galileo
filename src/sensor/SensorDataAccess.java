@@ -7,6 +7,7 @@ public class SensorDataAccess {
 	private static float uss_f  = -1.0f;
 	private static float uss_rf = -1.0f;
 	private static float uss_rb = -1.0f;
+	private static float uss_lb=-1.0f;
 	
 	private SensorDataAccess() {
 		// private constructor, so you cannot create an instance of it
@@ -34,6 +35,13 @@ public class SensorDataAccess {
 		return uss_rb;
 	}
 	
+	public static float getUss_lb() throws NoSensorDataAvailableException {
+		if (uss_lb == -1.0f) {
+			throw new exceptions.NoSensorDataAvailableException("left back Sensor");
+		}
+		return uss_lb;
+	}
+	
 	// SETTER
 	public static void setUss_f(float uss_f) {
 		SensorDataAccess.uss_f = uss_f;
@@ -43,6 +51,9 @@ public class SensorDataAccess {
 	}
 	public static void setUss_rb(float uss_rb) {
 		SensorDataAccess.uss_rb = uss_rb;
+	}
+	public static void setUss_lb(float uss_lb) {
+		SensorDataAccess.uss_lb = uss_lb;
 	}
 	
 }

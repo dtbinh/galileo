@@ -23,14 +23,16 @@ public class SensorReceiveThread extends Thread {
 			SensorDataAccess.setUss_f(sensorValues[0]);
 			SensorDataAccess.setUss_rf(sensorValues[1]);
 			SensorDataAccess.setUss_rb(sensorValues[2]);
+			SensorDataAccess.setUss_lb(sensorValues[3]);
 			
 			CSVFile.write(CSVFile.robotDataFilename, "EV2", receiveData);
 			
 			if (RunSettings.debugSensor) {
 				System.out.println();
-				System.out.print("uss_f:  " + sensorValues[0] + "\t");
-				System.out.print("uss_rf: " + sensorValues[1] + "\t");
-				System.out.print("uss_rb: " + sensorValues[2] + "\r\n");
+				System.out.print("uss_f:  " + sensorValues[0] + "\n");
+				System.out.print("uss_rf: " + sensorValues[1] + "\n");
+				System.out.print("uss_rb: " + sensorValues[2] + "\n");
+				System.out.print("uss_lb: " + sensorValues[3] + "\r\n");
 			}
 
 		}
