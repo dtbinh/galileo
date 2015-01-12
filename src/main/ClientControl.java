@@ -30,6 +30,10 @@ public class ClientControl {
 										// wheel has a perimeter of about 18 cm
 										// therefore it should move 18 cm forward
 			}
+			//test input turn right 90 degrees
+			if(input == 78){
+			movements.rotate(-190);
+			}
 			//test input turn 90 degrees
 			if(input == 77){
 				movements.rotate(190);
