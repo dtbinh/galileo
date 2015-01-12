@@ -112,8 +112,8 @@ public class Net {
 	 * @param uss_rf	ultrasonic sensor right front
 	 * @param uss_rb	ultrasonic sensor right back
 	 */
-	public static void sendSensordata(String IP, int PORT, float uss_f, float uss_rf, float uss_rb) {
-		byte[] sensorPacket = PacketHandler.makeSensorPacket(uss_f, uss_rf, uss_rb);
+	public static void sendSensordata(String IP, int PORT, float uss_f, float uss_rf, float uss_rb, float uss_lb) {
+		byte[] sensorPacket = PacketHandler.makeSensorPacket(uss_f, uss_rf, uss_rb, uss_lb);
 		send(IP, PORT, sensorPacket);
 	}
 	
