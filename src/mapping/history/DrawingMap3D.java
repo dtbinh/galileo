@@ -230,5 +230,54 @@ public class DrawingMap3D {
 			glPopMatrix();
 		}
 	}
+	public static void drawRectRobot(float x, float y, boolean shouldItBeDrawn) {
+		if (shouldItBeDrawn) {
+			glPushMatrix();
+			{
+				glTranslatef(x, y, 0);
+				glBegin(GL_QUADS);
+				{
+					// Top
+					glVertex3f(1.0f, 1.0f, -1f); // Top Right
+					glVertex3f(-1.0f, 1.0f, -1f); // Top Left
+					glVertex3f(-1.0f, 1.0f, 1.0f); // Bottom Left
+					glVertex3f(1.0f, 1.0f, 1.0f); // Bottom Right
+
+					// Bottom
+					glVertex3f(1.0f, -1.0f, 1.0f); // Top Right
+					glVertex3f(-1.0f, -1.0f, 1.0f); // Top Left
+					glVertex3f(-1.0f, -1.0f, -1f); // Bottom Left
+					glVertex3f(1.0f, -1.0f, -1f); // Bottom Right
+
+					// Front
+					glVertex3f(1.0f, 1.0f, 1.0f); // Top Right
+					glVertex3f(-1.0f, 1.0f, 1.0f); // Top Left
+					glVertex3f(-1.0f, -1.0f, 1.0f); // Bottom Left
+					glVertex3f(1.0f, -1.0f, 1.0f); // Bottom Right
+
+					// Back
+					glVertex3f(1.0f, -1.0f, -1.0f); // Bottom Left
+					glVertex3f(-1.0f, -1.0f, -1.0f); // Bottom Right
+					glVertex3f(-1.0f, 1.0f, -1.0f); // Top Right
+					glVertex3f(1.0f, 1.0f, -1.0f); // Top Left
+
+					// Left
+					glVertex3f(-1.0f, 1.0f, 1.0f); // Top Right
+					glVertex3f(-1.0f, 1.0f, -1.0f); // Top Left
+					glVertex3f(-1.0f, -1.0f, -1.0f); // Bottom Left
+					glVertex3f(-1.0f, -1.0f, 1.0f); // Bottom Right
+
+					// Right
+					glVertex3f(1.0f, 1.0f, -1.0f); // Top Right
+					glVertex3f(1.0f, 1.0f, 1.0f); // Top Left
+					glVertex3f(1.0f, -1.0f, 1.0f); // Bottom Left
+					glVertex3f(1.0f, -1.0f, -1.0f); // Bottom Right
+				}
+				glEnd();
+			}
+			glPopMatrix();
+		}
+	}
 
 }
+

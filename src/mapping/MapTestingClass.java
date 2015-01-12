@@ -48,7 +48,7 @@ public class MapTestingClass {
 		}
 
 		mapObjects[3] = empty;
-		mapObjects[9] = obstacle;
+		mapObjects[9] = robot;
 		
 
 		map.buildMapFromOneDimensionalArray(mapObjects, 4);

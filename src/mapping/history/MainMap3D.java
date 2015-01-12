@@ -28,7 +28,7 @@ public class MainMap3D extends Thread {
 	private static boolean drawingIt = true;
 	private static float movementOfCameraSpeed = 0.1f;
 
-	public static Map map = new mapping.MapTestingClass().map3;
+	public static Map map = new mapping.MapTestingClass().map;
 
 	// public static Map map = ComputerMain.getMap();
 
@@ -120,7 +120,7 @@ public class MainMap3D extends Thread {
 								drawingIt);
 					} else if (map.get(y).get(x) == MapObject.ROBOT) {
 						glColor3f(1f, 1f, 1f);
-						DrawingMap3D.drawRectObstacle(var1 * a, var2 * a,
+						DrawingMap3D.drawRectRobot(var1 * a, var2 * a,
 								drawingIt);
 					}
 					var1++;
