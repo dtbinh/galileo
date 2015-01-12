@@ -14,7 +14,7 @@ public class RobotSettings {
 	private static String motorC = "wheel_right";
 	private static String motorD = "nothing";
 	
-	private static String S1 = "nothing";
+	private static String S1 = "uss_lb";
 	private static String S2 = "uss_rb";
 	private static String S3 = "uss_f";
 	private static String S4 = "uss_rf";

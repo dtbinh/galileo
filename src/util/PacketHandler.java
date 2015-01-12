@@ -28,7 +28,7 @@ public class PacketHandler {
 		
 		if (packetbytes[0] == 0) {
 			float[] sensordata = getSensordata(packetbytes);
-			str = sensordata[0] + " , " + sensordata[1] + " , " + sensordata[2];
+			str = sensordata[0] + " , " + sensordata[1] + " , " + sensordata[2] + " , " + sensordata[3];
 		}
 		else if (packetbytes[0] == 1)
 			str = getRobotCommand(packetbytes) +"";

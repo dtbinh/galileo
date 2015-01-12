@@ -6,4 +6,5 @@
 ### rf		:	right front
 ### rb		:	right back
 ###	f		:	front
+### lb		:	left back
 ### ACK		:	acknowledgment
