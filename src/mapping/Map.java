@@ -15,7 +15,7 @@ public class Map extends ArrayList<ArrayList<MapObject>> {
 	private int height = 0;
 	private MapObject empty = MapObject.EMPTY;
 	private MapObject wall = MapObject.WALL;
-
+	private MapObject obstacle = MapObject.OBSTACLE;
 	// private ArrayList<ArrayList<MapObject>> arrayList = new
 	// ArrayList<ArrayList<MapObject>>();
 
@@ -77,6 +77,7 @@ public class Map extends ArrayList<ArrayList<MapObject>> {
 	}
 
 	public void updateMapFromVectors(TestVector vector) {
+
 		if (this.height == 0) {
 			this.add(new ArrayList<MapObject>());
 			this.height += 1;
@@ -85,7 +86,7 @@ public class Map extends ArrayList<ArrayList<MapObject>> {
 		if (vector.y != 0 && this.height - 1 < vector.y + this.y) {
 			// the difference between the y movement and the height so we know
 			// how much additional rows(height-y) we need
-			int mapExpansion = (vector.y + this.y) - this.height;
+			int mapExpansion = (vector.y + this.y) - (this.height - 1);
 			for (int i = 0; i < mapExpansion; i++) {
 				this.add(new ArrayList<MapObject>());
 
@@ -99,44 +100,66 @@ public class Map extends ArrayList<ArrayList<MapObject>> {
 		}
 
 		// negative y
-		if (vector.y < 0 && (vector.y + this.y) < 0) {
-			int mapShift = vector.y + this.y;
-			for (int i = mapShift + 1; i < 0; i++) {
-				this.add(0, new ArrayList<MapObject>());
-				this.height += 1;
-				for (int j = 0; j < this.width; j++) {
-					if (this.x == j) {
-						this.get(0).add(wall);
-					} else {
-						this.get(0).add(empty);
+		if (vector.y < 0) {
+			if ((vector.y + (this.y+1)) < 0) {
+				int mapShift = vector.y + this.y;
+				System.out.println("mapshitf" + mapShift);
+				for (int i = mapShift + 1; i < 0; i++) {
+					this.add(0, new ArrayList<MapObject>());
+					this.height += 1;
+					for (int j = 0; j < this.width; j++) {
+						if (this.x == j) {
+//							this.get(0).add(wall);
+							this.get(0).add(empty);
+						} else {
+							this.get(0).add(empty);
+						}
 					}
+					this.y+=1;
 				}
+				for (int i = vector.y ; i < 0; i++) {
+					this.get((this.y+1) + i).set(this.x+1, wall);
+				}
+				this.y += vector.y - 1;
+//				this.y = 0;
+			} else {
+//				System.out.println("vectorYYYY"+vector.y);
+//				System.out.println("thisYYYY"+this.y);
+//				System.out.println("thisXXX"+this.x);
+				for (int i = vector.y ; i < 0; i++) {
+					this.get((this.y+1) + i).set(this.x+1, wall);
+				}
+				this.y += vector.y - 1;
 			}
-			this.y = 0;
 
 		}
 
 		// negative x
 		if (vector.x < 0) {
-			if (vector.x + this.x < 0) {
+			if ((vector.x + (this.x + 1)) < 0) {
 				int mapShift = vector.x + this.x;
 				for (int i = mapShift; i < 0; i++) {
 
 					for (int j = 0; j < this.height; j++) {
 						if (j == this.y) {
-							this.get(j).add(0, wall);
+							this.get(j).add(0, empty);
+//							this.get(j).add(0, wall);
 						} else {
 							this.get(j).add(0, empty);
+							
 						}
-
+						
 					}
+					this.x+=1;
 				}
-				this.x = 0;
+				for (int i = (vector.x + 1); i < 0; i++) {
+					this.get(this.y + 1).set(this.x + i, wall);
+				}
+				this.x += vector.x;
+//				this.x = 0;
 			} else {
-				System.out.println("JETZT ANFANG: " + vector.x);
-				for (int i = vector.x; i < 0; i++) {
-					System.out.println("JETZT: " + (this.x + i));
-					this.get(this.y).set(this.x + i, wall);
+				for (int i = (vector.x + 1); i < 0; i++) {
+					this.get(this.y + 1).set(this.x + i, wall);
 				}
 				this.x += vector.x;
 			}
@@ -156,17 +179,10 @@ public class Map extends ArrayList<ArrayList<MapObject>> {
 			}
 		}
 
-		// System.out.println("y "+this.y);
-		// System.out.println("x "+this.x);
-		// System.out.println("width "+this.width);
-		// System.out.println("height "+this.height);
-		// System.out.println("vectorx "+vector.x);
-		// System.out.println("vectory "+vector.y);
-
 		if (vector.y > 0) {
 			for (int i = 0; i < vector.y; i++) {
 				// System.out.println("heightaktiv: "+this.size());
-				this.get(this.y + i).set(this.x, wall);
+				this.get((this.y + i) + 1).set(this.x, wall);
 			}
 			this.y += vector.y - 1;
 		}
@@ -179,12 +195,22 @@ public class Map extends ArrayList<ArrayList<MapObject>> {
 			this.x += vector.x - 1;
 			;
 		}
+//		System.out.println("y " + this.y);
+//		System.out.println("x " + this.x);
+//		System.out.println("width " + this.width);
+//		System.out.println("height " + this.height);
+//		System.out.println("vectorx " + vector.x);
+//		System.out.println("vectory " + vector.y);
 
 	}
 	
+	public void insertObstacle(int x , int y){
+		this.get(y).set(x, obstacle);
+	}
+
 	public String toString() {
 		String map = "";
-		for (ArrayList<MapObject> arry : this ) {
+		for (ArrayList<MapObject> arry : this) {
 			map += arry.toString();
 			map += "\n";
 		}
